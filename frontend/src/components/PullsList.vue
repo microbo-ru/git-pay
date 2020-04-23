@@ -2,7 +2,9 @@
   <div>
     <h1>Список пулл реквестов</h1>
     <v-list-item
-      v-for="(pulls, index) in $store.getters.pulls_by_author('jqlee85')"
+      v-for="(pulls, index) in $store.getters.pulls_by_author(
+        $store.state.username
+      )"
       :key="`${index}jqlee85`"
     >
       <v-list-item-content>

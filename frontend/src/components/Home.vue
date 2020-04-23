@@ -9,10 +9,10 @@
       <Login />
     </v-overlay>
 
-    <div v-if="loading">loading contracts...</div>
+    <div v-if="!$store.state.username">loading contracts...</div>
 
-    <div v-if="!loading">
-      <PullsList />
+    <div v-if="$store.state.username && !loading">
+      <PullsList v-if="$store.getters.ready_to_show_pulls" />
       <ReposList />
     </div>
   </v-container>
@@ -45,7 +45,6 @@ export default {
     ...mapActions(["fetch_contracts", "fetch_prs_by_author"]),
     async load_contracts() {
       await this.fetch_contracts();
-      await this.fetch_prs_by_author("jqlee85");
       this.loading = false;
     },
     showOverlay() {

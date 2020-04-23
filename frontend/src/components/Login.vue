@@ -5,7 +5,11 @@
     </v-card-title>
     <v-card-text>
       <v-form>
-        <v-text-field label="Username" prepend-icon="mdi-account-circle" />
+        <v-text-field
+          label="Username"
+          prepend-icon="mdi-account-circle"
+          v-model="username"
+        />
         <v-text-field
           :type="showPassword ? 'text' : 'password'"
           label="Password"
@@ -19,7 +23,7 @@
     <v-card-actions>
       <v-btn color="success">Register</v-btn>
       <v-spacer></v-spacer>
-      <v-btn color="info">Login</v-btn>
+      <v-btn color="info" @click="select_username">Login</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -29,8 +33,14 @@ export default {
   name: "Login",
   data() {
     return {
-      showPassword: false
+      showPassword: false,
+      username: "",
     };
-  }
+  },
+  methods: {
+    select_username() {
+      this.$store.dispatch("set_username", this.username);
+    },
+  },
 };
 </script>

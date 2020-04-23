@@ -9,6 +9,7 @@ export default new Vuex.Store({
     server_url: "http://localhost:5000/",
     contracts: {},
     pulls: {},
+    username: "",
   },
   getters: {
     repos: (state) => {
@@ -21,6 +22,9 @@ export default new Vuex.Store({
     pulls_by_author: (state) => (author) => {
       return state.pulls[author].items;
     },
+    ready_to_show_pulls: (state) => {
+      return state.username in state.pulls;
+    },
   },
   mutations: {
     UPDATE_CONTRACTS(state, contracts) {
@@ -32,6 +36,9 @@ export default new Vuex.Store({
       console.log(author);
       console.log(pulls);
       Vue.set(state.pulls, author, pulls);
+    },
+    UPDATE_USERNAME(state, username) {
+      state.username = username;
     },
   },
   actions: {
@@ -47,6 +54,10 @@ export default new Vuex.Store({
       let res = await axios.post(`${state.server_url}/pulls`, { author });
       res = JSON.parse(res.data);
       commit("UPDATE_PRS_BY_AUTHOR", { author, pulls: res });
+    },
+    set_username({ commit, dispatch }, name) {
+      dispatch("fetch_prs_by_author", name);
+      commit("UPDATE_USERNAME", name);
     },
   },
   modules: {},
