@@ -1,6 +1,9 @@
 <template>
   <v-container>
-    <Header @show-overlay="showOverlay"></Header>
+    <Header
+      @change-component="changeComponent"
+      @show-overlay="showOverlay"
+    ></Header>
 
     <v-overlay :value="overlay" :absolute="true">
       <v-btn icon @click="overlay = false">
@@ -9,47 +12,53 @@
       <Login @show-overlay="showOverlay" />
     </v-overlay>
 
-    <div v-if="!$store.state.username">loading contracts...</div>
+    <div v-if="activePage == 'Welcome'"><Welcome /></div>
 
-    <div v-if="$store.state.username && !loading">
-      <PullsList v-if="$store.getters.ready_to_show_pulls" />
-      <ReposList />
+    <div v-if="$store.state.username && activePage == 'User'">
+      <User />
+    </div>
+
+    <div v-if="activePage == 'Repos'">
+      <Repos />
+    </div>
+
+    <div v-if="activePage == 'Projects'">
+      <Projects />
     </div>
   </v-container>
 </template>
 
 <script>
-import PullsList from "./PullsList";
-import ReposList from "./ReposList";
+import Welcome from "./welcome/Welcome";
+import User from "./user/UserPage";
+import Projects from "./projects/Projects";
+import Repos from "./repos/Repos";
+
 import Header from "./Header";
 import Login from "./Login";
-import { mapActions } from "vuex";
 
 export default {
   name: "Home",
   components: {
-    PullsList,
-    ReposList,
     Header,
-    Login
+    Login,
+    Welcome,
+    Projects,
+    Repos,
+    User,
   },
   data: () => ({
-    loading: true,
-    overlay: null
+    activePage: "Projects",
+    overlay: false,
   }),
-  created() {
-    this.loading = true;
-    this.load_contracts();
-  },
+
   methods: {
-    ...mapActions(["fetch_contracts", "fetch_prs_by_author"]),
-    async load_contracts() {
-      await this.fetch_contracts();
-      this.loading = false;
-    },
     showOverlay() {
       this.overlay = !this.overlay;
-    }
-  }
+    },
+    changeComponent(pageName) {
+      this.activePage = pageName;
+    },
+  },
 };
 </script>
