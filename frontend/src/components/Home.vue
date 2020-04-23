@@ -48,7 +48,7 @@ export default {
     User,
   },
   data: () => ({
-    activePage: "Projects",
+    activePage: "Welcome",
     overlay: false,
   }),
 

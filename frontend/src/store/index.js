@@ -10,6 +10,7 @@ export default new Vuex.Store({
     contracts: {},
     pulls: {},
     username: "",
+    repos: [],
   },
   getters: {
     repos: (state) => {
@@ -25,6 +26,9 @@ export default new Vuex.Store({
     ready_to_show_pulls: (state) => {
       return state.username in state.pulls;
     },
+    get_repos: (state) => {
+      return state.repos;
+    },
   },
   mutations: {
     UPDATE_CONTRACTS(state, contracts) {
@@ -38,6 +42,9 @@ export default new Vuex.Store({
     },
     UPDATE_USERNAME(state, username) {
       state.username = username;
+    },
+    SET_REPOS(state, repos) {
+      state.repos = repos;
     },
   },
   actions: {
@@ -57,6 +64,14 @@ export default new Vuex.Store({
     set_username({ commit, dispatch }, name) {
       dispatch("fetch_prs_by_author", name);
       commit("UPDATE_USERNAME", name);
+    },
+    async fetch_repos({ state, commit }) {
+      if (!state.username) return;
+      let repos = await axios.post(`${state.server_url}/repos`, {
+        username: state.username,
+      });
+
+      commit("SET_REPOS", JSON.parse(repos.data));
     },
   },
   modules: {},
