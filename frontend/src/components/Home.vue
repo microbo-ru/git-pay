@@ -6,7 +6,7 @@
       <v-btn icon @click="overlay = false">
         <v-icon>mdi-close</v-icon>
       </v-btn>
-      <Login />
+      <Login @show-overlay="showOverlay" />
     </v-overlay>
 
     <div v-if="!$store.state.username">loading contracts...</div>
@@ -31,11 +31,11 @@ export default {
     PullsList,
     ReposList,
     Header,
-    Login,
+    Login
   },
   data: () => ({
     loading: true,
-    overlay: null,
+    overlay: null
   }),
   created() {
     this.loading = true;
@@ -49,7 +49,7 @@ export default {
     },
     showOverlay() {
       this.overlay = !this.overlay;
-    },
-  },
+    }
+  }
 };
 </script>

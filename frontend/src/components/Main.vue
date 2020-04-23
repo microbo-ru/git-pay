@@ -1,11 +1,11 @@
 <template>
   <v-container width="100%" height="100%">
     <Header @show-overlay="showOverlay"></Header>
-    <v-overlay :value="overlay" absolute="true">
+    <v-overlay :value="overlay" @show-overlay="showOverlay" absolute="true">
       <v-btn icon @click="overlay = false">
         <v-icon>mdi-close</v-icon>
       </v-btn>
-      <Login />
+      <Login @show-overlay="showOverlay" />
     </v-overlay>
   </v-container>
 </template>
@@ -26,6 +26,9 @@ export default {
   methods: {
     showOverlay() {
       this.overlay = !this.overlay;
+    },
+    closeOverlay() {
+      console.log("works");
     }
   }
 };

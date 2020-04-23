@@ -5,11 +5,7 @@
     </v-card-title>
     <v-card-text>
       <v-form>
-        <v-text-field
-          label="Username"
-          prepend-icon="mdi-account-circle"
-          v-model="username"
-        />
+        <v-text-field label="Username" prepend-icon="mdi-account-circle" v-model="username" />
         <v-text-field
           :type="showPassword ? 'text' : 'password'"
           label="Password"
@@ -21,7 +17,7 @@
     </v-card-text>
     <v-divider></v-divider>
     <v-card-actions>
-      <v-btn color="success">Register</v-btn>
+      <v-btn color="success" @click="register_button">Register</v-btn>
       <v-spacer></v-spacer>
       <v-btn color="info" @click="select_username">Login</v-btn>
     </v-card-actions>
@@ -34,13 +30,17 @@ export default {
   data() {
     return {
       showPassword: false,
-      username: "",
+      username: ""
     };
   },
   methods: {
-    select_username() {
-      this.$store.dispatch("set_username", this.username);
+    register_button() {
+      this.$emit("show-overlay");
     },
-  },
+    select_username() {
+      this.$emit("show-overlay");
+      this.$store.dispatch("set_username", this.username);
+    }
+  }
 };
 </script>
