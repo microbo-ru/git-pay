@@ -1,35 +1,42 @@
 <template>
   <v-container>
+    <Header @show-overlay="showOverlay"></Header>
+
+    <v-overlay :value="overlay" :absolute="true">
+      <v-btn icon @click="overlay = false">
+        <v-icon>mdi-close</v-icon>
+      </v-btn>
+      <Login />
+    </v-overlay>
+
     <div v-if="loading">loading contracts...</div>
 
     <div v-if="!loading">
-      <h1>Список контрактов</h1>
-      <v-list-item v-for="(repo, index) in $store.getters.repos" :key="index">
-        <v-list-item-content>
-          <a :href="repo.url">{{ repo.name }}</a>
-        </v-list-item-content>
-      </v-list-item>
-
-      <h1>Список пулл реквестов</h1>
-      <v-list-item
-        v-for="(pulls, index) in $store.getters.pulls_by_author('jqlee85')"
-        :key="`${index}jqlee85`"
-      >
-        <v-list-item-content>
-          <a :href="pulls.html_url">{{ pulls.title }}</a>
-        </v-list-item-content>
-      </v-list-item>
+      <PullsList />
+      <ReposList />
     </div>
   </v-container>
 </template>
 
 <script>
+import PullsList from "./PullsList";
+import ReposList from "./ReposList";
+import Header from "./Header";
+import Login from "./Login";
 import { mapActions } from "vuex";
 
 export default {
   name: "Home",
-
-  data: () => ({ loading: true }),
+  components: {
+    PullsList,
+    ReposList,
+    Header,
+    Login,
+  },
+  data: () => ({
+    loading: true,
+    overlay: null,
+  }),
   created() {
     this.loading = true;
     this.load_contracts();
@@ -40,6 +47,9 @@ export default {
       await this.fetch_contracts();
       await this.fetch_prs_by_author("jqlee85");
       this.loading = false;
+    },
+    showOverlay() {
+      this.overlay = !this.overlay;
     },
   },
 };
