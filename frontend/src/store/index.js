@@ -33,8 +33,7 @@ export default new Vuex.Store({
     UPDATE_PRS_BY_AUTHOR(state, payload) {
       let author = payload.author;
       let pulls = payload.pulls;
-      console.log(author);
-      console.log(pulls);
+
       Vue.set(state.pulls, author, pulls);
     },
     UPDATE_USERNAME(state, username) {
