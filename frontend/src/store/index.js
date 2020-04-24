@@ -6,7 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    server_url: "http://localhost:5000/",
+    server_url: "http://localhost:5000",
     contracts: {},
     pulls: {},
     username: "",
@@ -32,8 +32,10 @@ export default new Vuex.Store({
       return state.repos;
     },
     get_marked_repos: (state) => {
-      console.log(state.marked_repos);
       return state.marked_repos;
+    },
+    get_contracts: (state) => {
+      return state.contracts;
     },
   },
   mutations: {
@@ -63,7 +65,7 @@ export default new Vuex.Store({
       let contracts;
       if ("data" in res) contracts = res["data"];
       else return;
-
+      console.log(contracts);
       commit("UPDATE_CONTRACTS", contracts);
     },
     async fetch_prs_by_author({ state, commit }, author) {

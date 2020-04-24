@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import Welcome from "./welcome/Welcome";
 import User from "./user/UserPage";
 import Projects from "./projects/Projects";
@@ -55,6 +56,7 @@ export default {
   }),
 
   methods: {
+    ...mapActions(["fetch_contracts"]),
     showOverlay() {
       if (!this.loginState) this.overlay = !this.overlay;
       else alert("dont");
@@ -62,6 +64,13 @@ export default {
     changeComponent(pageName) {
       this.activePage = pageName;
     },
+    async start_fetching() {
+      this.fetch_contracts();
+    },
+  },
+
+  created() {
+    this.start_fetching();
   },
   computed: {
     loginState() {

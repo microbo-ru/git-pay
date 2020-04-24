@@ -53,7 +53,6 @@ export default {
       "fetch_marked_repos",
     ]),
     async load_contracts() {
-      await this.fetch_contracts();
       await this.fetch_repos();
       await this.fetch_marked_repos();
       this.loading = false;
