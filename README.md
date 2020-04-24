@@ -20,7 +20,7 @@ git remote add heroku https://git.heroku.com/microbo.git
 git subtree push --prefix frontend heroku master
 ```
 
-##### Deploy forced
+#### Deploy forced
 ```shell
 git push heroku `git subtree split --prefix frontend master`:master --forces
 ```
