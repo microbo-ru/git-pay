@@ -1,32 +1,8 @@
 <template>
-  <div>
-    <div width="100%" id="block1">
-      <v-container>
-        <v-row class="display-4" id="gitpay">GitPay</v-row>
-        <v-row justify="space-between">
-          <v-col class="display-2">we do smth</v-col>
-          <v-col class="display-2">pls love us</v-col>
-        </v-row>
-      </v-container>
-    </div>
-    <div id="block2">
-      <v-container>
-        <v-row class="display-2">Innovative platform for your purposes</v-row>
-        <v-row justify="space-between">
-          <v-col class="display-2">somebody once</v-col>
-          <v-col class="display-2">told me the world is gona roll me</v-col>
-        </v-row>
-      </v-container>
-    </div>
-    <div id="block3">
-      <v-container>
-        <v-row class="display-2">Sdsadasdasd</v-row>
-        <v-row justify="space-between">
-          <v-col class="display-2">somebody once</v-col>
-          <v-col class="display-2">told me the world is gona roll me</v-col>
-        </v-row>
-      </v-container>
-    </div>
+  <div width="100%" id="block1">
+    <v-container>
+      <v-row class="display-4" id="gitpay"> <v-col> GitPay</v-col></v-row>
+    </v-container>
   </div>
 </template>
 
@@ -38,15 +14,11 @@ export default {
 
 <style>
 #block1 {
-  background-color: rgb(26, 49, 102);
+  background-image: url("https://miro.medium.com/max/10944/1*p7TDDzzkqzp_QPH2UI2FnA.jpeg");
+  background-size: 100rem;
+  height: 100%;
 }
 #gitpay {
-  color: cornsilk;
-}
-#block2 {
-  background-color: #e6ebed;
-}
-#block3 {
-  background-color: #3f51b5;
+  color: rgb(42, 33, 33);
 }
 </style>
