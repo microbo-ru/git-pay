@@ -1,14 +1,14 @@
 <template>
-  <div>
-    <div>GitPay</div>
+  <v-container>
+    <div width="100%">GitPay</div>
     <div>What are we?</div>
     <div>Active Projects</div>
-  </div>
+  </v-container>
 </template>
 
 <script>
 export default {
-  name: "Welcome",
+  name: "Welcome"
 };
 </script>
 

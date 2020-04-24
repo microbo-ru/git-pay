@@ -53,10 +53,16 @@ export default {
 
   methods: {
     showOverlay() {
-      this.overlay = !this.overlay;
+      if (!this.loginState) this.overlay = !this.overlay;
+      else alert("dont");
     },
     changeComponent(pageName) {
       this.activePage = pageName;
+    }
+  },
+  computed: {
+    loginState() {
+      return this.$store.state.username;
     }
   }
 };

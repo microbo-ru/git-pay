@@ -19,6 +19,7 @@
     <v-card-actions>
       <v-btn color="success" @click="register_button">Register</v-btn>
       <v-spacer></v-spacer>
+
       <v-btn color="info" @click="select_username">Login</v-btn>
     </v-card-actions>
   </v-card>
