@@ -21,7 +21,7 @@ export default {
   methods: {
     showOverlay() {
       this.$emit("show-overlay");
-    }
-  }
+    },
+  },
 };
 </script>

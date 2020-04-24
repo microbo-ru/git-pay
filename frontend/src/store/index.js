@@ -11,6 +11,7 @@ export default new Vuex.Store({
     pulls: {},
     username: "",
     repos: [],
+    avavtar_url: "",
   },
   getters: {
     repos: (state) => {
@@ -45,6 +46,7 @@ export default new Vuex.Store({
     },
     SET_REPOS(state, repos) {
       state.repos = repos;
+      state.avatar_url = state.repos[0].owner.avatar_url;
     },
   },
   actions: {
