@@ -2,11 +2,11 @@
   <div>
     <v-container>
       <v-row>
-        <v-col md="3">
+        <v-col md="2">
           <div>Type</div>
           <div>Type selector</div>
         </v-col>
-        <v-col md="5"> <ContractsList /></v-col>
+        <v-col md="9"> <ContractsList /></v-col>
       </v-row>
     </v-container>
   </div>
