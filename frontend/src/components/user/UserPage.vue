@@ -3,7 +3,7 @@
     <v-row>
       <v-col md="auto">
         <v-img
-          src="https://avatars0.githubusercontent.com/u/23087350?s=400&v=4"
+          :src="$store.state.avatar_url"
           width="100px"
           height="100px"
         ></v-img>
@@ -36,23 +36,29 @@ export default {
   name: "User",
   components: {
     PullsList,
-    ReposList
+    ReposList,
   },
   data: () => ({
-    loading: true
+    loading: true,
   }),
   created() {
     this.loading = true;
     this.load_contracts();
   },
   methods: {
-    ...mapActions(["fetch_contracts", "fetch_prs_by_author", "fetch_repos"]),
+    ...mapActions([
+      "fetch_contracts",
+      "fetch_prs_by_author",
+      "fetch_repos",
+      "fetch_marked_repos",
+    ]),
     async load_contracts() {
       await this.fetch_contracts();
       await this.fetch_repos();
+      await this.fetch_marked_repos();
       this.loading = false;
-    }
-  }
+    },
+  },
 };
 </script>
 

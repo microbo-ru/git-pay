@@ -11,6 +11,8 @@ export default new Vuex.Store({
     pulls: {},
     username: "",
     repos: [],
+    avavtar_url: "",
+    marked_repos: [],
   },
   getters: {
     repos: (state) => {
@@ -29,6 +31,10 @@ export default new Vuex.Store({
     get_repos: (state) => {
       return state.repos;
     },
+    get_marked_repos: (state) => {
+      console.log(state.marked_repos);
+      return state.marked_repos;
+    },
   },
   mutations: {
     UPDATE_CONTRACTS(state, contracts) {
@@ -45,6 +51,10 @@ export default new Vuex.Store({
     },
     SET_REPOS(state, repos) {
       state.repos = repos;
+      state.avatar_url = state.repos[0].owner.avatar_url;
+    },
+    SET_MARKED_REPOS(state, repos) {
+      state.marked_repos = repos;
     },
   },
   actions: {
@@ -72,6 +82,14 @@ export default new Vuex.Store({
       });
 
       commit("SET_REPOS", JSON.parse(repos.data));
+    },
+    async fetch_marked_repos({ state, commit }) {
+      if (!state.username) return;
+      let repos = await axios.post(`${state.server_url}/marked_repos`, {
+        username: state.username,
+      });
+      repos.data = repos.data.map((json) => JSON.parse(json));
+      commit("SET_MARKED_REPOS", repos.data);
     },
   },
   modules: {},

@@ -6,7 +6,7 @@
       max-width="400"
       raised
       tile
-      v-for="(repo, index) in $store.getters.get_repos"
+      v-for="(repo, index) in $store.getters.get_marked_repos"
       :key="index"
     >
       <v-card-title>{{ repo.name }}</v-card-title>
@@ -22,9 +22,8 @@
 
 <script>
 export default {
-  name: "ReposList"
+  name: "ReposList",
 };
 </script>
 
-<style>
-</style>
+<style></style>
