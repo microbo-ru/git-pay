@@ -46,10 +46,16 @@ export default {
     this.load_contracts();
   },
   methods: {
-    ...mapActions(["fetch_contracts", "fetch_prs_by_author", "fetch_repos"]),
+    ...mapActions([
+      "fetch_contracts",
+      "fetch_prs_by_author",
+      "fetch_repos",
+      "fetch_marked_repos",
+    ]),
     async load_contracts() {
       await this.fetch_contracts();
       await this.fetch_repos();
+      await this.fetch_marked_repos();
       this.loading = false;
     },
   },
