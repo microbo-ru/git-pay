@@ -5,7 +5,11 @@
     </v-card-title>
     <v-card-text>
       <v-form>
-        <v-text-field label="Username" prepend-icon="mdi-account-circle" v-model="username" />
+        <v-text-field
+          label="Username"
+          prepend-icon="mdi-account-circle"
+          v-model="username"
+        />
         <v-text-field
           :type="showPassword ? 'text' : 'password'"
           label="Password"
@@ -31,7 +35,7 @@ export default {
   data() {
     return {
       showPassword: false,
-      username: ""
+      username: "",
     };
   },
   methods: {
@@ -40,8 +44,9 @@ export default {
     },
     select_username() {
       this.$emit("show-overlay");
+      this.$emit("selected_username");
       this.$store.dispatch("set_username", this.username);
-    }
-  }
+    },
+  },
 };
 </script>

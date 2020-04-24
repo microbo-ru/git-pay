@@ -9,7 +9,10 @@
       <v-btn icon @click="overlay = false">
         <v-icon>mdi-close</v-icon>
       </v-btn>
-      <Login @show-overlay="showOverlay" />
+      <Login
+        @show-overlay="showOverlay"
+        @selected_username="activePage = 'User'"
+      />
     </v-overlay>
 
     <div v-if="activePage == 'Welcome'">
