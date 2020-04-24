@@ -1,9 +1,6 @@
 <template>
   <v-container>
-    <Header
-      @change-component="changeComponent"
-      @show-overlay="showOverlay"
-    ></Header>
+    <Header @change-component="changeComponent" @show-overlay="showOverlay"></Header>
 
     <v-overlay :value="overlay" :absolute="true">
       <v-btn icon @click="overlay = false">
@@ -12,7 +9,9 @@
       <Login @show-overlay="showOverlay" />
     </v-overlay>
 
-    <div v-if="activePage == 'Welcome'"><Welcome /></div>
+    <div v-if="activePage == 'Welcome'">
+      <Welcome />
+    </div>
 
     <div v-if="$store.state.username && activePage == 'User'">
       <User />
@@ -45,11 +44,11 @@ export default {
     Welcome,
     Projects,
     Repos,
-    User,
+    User
   },
   data: () => ({
     activePage: "Welcome",
-    overlay: false,
+    overlay: false
   }),
 
   methods: {
@@ -58,7 +57,7 @@ export default {
     },
     changeComponent(pageName) {
       this.activePage = pageName;
-    },
-  },
+    }
+  }
 };
 </script>

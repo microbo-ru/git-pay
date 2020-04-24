@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-container>
     <h1>Список пулл реквестов</h1>
     <v-list-item
       v-for="(pulls, index) in $store.getters.pulls_by_author(
@@ -11,12 +11,12 @@
         <a :href="pulls.html_url">{{ pulls.title }}</a>
       </v-list-item-content>
     </v-list-item>
-  </div>
+  </v-container>
 </template>
 
 <script>
 export default {
-  name: "PullsList",
+  name: "PullsList"
 };
 </script>
 

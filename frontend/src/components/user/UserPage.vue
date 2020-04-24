@@ -1,18 +1,30 @@
 <template>
   <div>
-    <v-img
-      src="https://avatars0.githubusercontent.com/u/23087350?s=400&v=4"
-    ></v-img>
-    <h1 v-if="$store.state.username">{{ $store.state.username }}</h1>
-
-    <div v-if="$store.state.username && !loading">
-      <ReposList />
-    </div>
-    <div>
-      <div v-if="$store.state.username && !loading">
-        <PullsList v-if="$store.getters.ready_to_show_pulls" />
-      </div>
-    </div>
+    <v-row>
+      <v-col md="auto">
+        <v-img
+          src="https://avatars0.githubusercontent.com/u/23087350?s=400&v=4"
+          width="100px"
+          height="100px"
+        ></v-img>
+        <h1 v-if="$store.state.username">{{ $store.state.username }}</h1>
+      </v-col>
+      <v-col>Какая-то стика</v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <div v-if="$store.state.username && !loading">
+          <ReposList />
+        </div>
+      </v-col>
+      <v-col>
+        <div>
+          <div v-if="$store.state.username && !loading">
+            <PullsList v-if="$store.getters.ready_to_show_pulls" />
+          </div>
+        </div>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -24,10 +36,10 @@ export default {
   name: "User",
   components: {
     PullsList,
-    ReposList,
+    ReposList
   },
   data: () => ({
-    loading: true,
+    loading: true
   }),
   created() {
     this.loading = true;
@@ -39,8 +51,8 @@ export default {
       await this.fetch_contracts();
       await this.fetch_repos();
       this.loading = false;
-    },
-  },
+    }
+  }
 };
 </script>
 
