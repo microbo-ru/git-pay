@@ -6,7 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    server_url: "http://localhost:5000",
+    server_url: process.env.VUE_APP_SERVER_URL,
     contracts: {},
     pulls: {},
     username: "",
