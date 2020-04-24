@@ -46,6 +46,7 @@ export default {
       this.$emit("show-overlay");
       this.$emit("selected_username");
       this.$store.dispatch("set_username", this.username);
+      this.$router.push("User");
     },
   },
 };

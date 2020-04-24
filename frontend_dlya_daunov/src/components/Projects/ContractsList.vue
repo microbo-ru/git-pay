@@ -3,7 +3,6 @@
     <h1>Список контрактов</h1>
     <v-card
       class="repo"
-      max-width="400"
       raised
       tile
       v-for="(repo, index) in $store.getters.repos"
