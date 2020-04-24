@@ -1,18 +1,17 @@
 <template>
-  <v-app>
+  <v-app :style="{ background: $vuetify.theme.themes[theme].background }">
     <v-app-bar app color="primary" dark>
-      <v-toolbar-title
-        ><router-link to="/" tag="a">GitPay</router-link>
+      <v-toolbar-title>
+        <router-link to="/"> <v-btn text x-large>GitPay </v-btn></router-link>
       </v-toolbar-title>
       <v-container>
-        <router-link to="Projects"><v-btn>Projects </v-btn></router-link>
-        <router-link to="User"><v-btn>LK</v-btn></router-link>
+        <router-link to="Projects"><v-btn text>Projects </v-btn></router-link>
+        <router-link to="User"><v-btn text>LK</v-btn></router-link>
       </v-container>
 
-      <v-btn @click="showOverlay">
+      <v-btn @click="showOverlay" outlined>
         <div v-if="!$store.state.username">login</div>
         <div v-if="$store.state.username">logout</div>
-        <v-icon size="x-large">mdi-account-box</v-icon>
       </v-btn>
     </v-app-bar>
 
@@ -47,6 +46,11 @@ export default {
     showOverlay() {
       if (!this.loginState) this.overlay = !this.overlay;
       else alert("dont");
+    },
+  },
+  computed: {
+    theme() {
+      return this.$vuetify.theme.dark ? "dark" : "light";
     },
   },
 };
