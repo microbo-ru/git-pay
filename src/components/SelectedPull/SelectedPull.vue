@@ -11,7 +11,7 @@ export default {
   name: "SelectedPull",
   methods: {
     test() {
-      console.log(this.$store.state);
+      this.$store.dispatch("set_agree", this.$store.getters.get_selected_pull);
     }
   }
 };
