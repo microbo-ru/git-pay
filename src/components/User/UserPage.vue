@@ -14,20 +14,21 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col>
-          <div v-if="$store.state.username && $store.state.status=='empl'">
-            <ReposList />
-            <NewRepo v-if="$store.getters.ready_to_show_pulls" />
-            <div v-for="(pull, index) in $store.state.marked_pulls" :key="index">{{pull.html_url}}</div>
-          </div>
-        </v-col>
-        <v-col>
-          <div>
-            <div v-if="$store.state.username && $store.state.status=='user'">
-              <PullsList v-if="$store.getters.ready_to_show_pulls" />
-            </div>
-          </div>
-        </v-col>
+        <div v-if="$store.state.username && $store.state.status=='empl'" class="container">
+          <v-row>
+            <v-col md="3">
+              <h3>Добавить новый пул</h3>
+              <NewRepo v-if="$store.getters.ready_to_show_pulls" />
+            </v-col>
+            <v-col md="9">
+              <MarkedPullsList />
+            </v-col>
+          </v-row>
+        </div>
+
+        <div v-if="$store.state.username && $store.state.status=='user'">
+          <PullsList v-if="$store.getters.ready_to_show_pulls" />
+        </div>
       </v-row>
     </v-container>
   </div>
@@ -35,14 +36,15 @@
 
 <script>
 import PullsList from "../PullsList";
-import ReposList from "./ReposList";
 import NewRepo from "./NewRepo";
+import MarkedPullsList from "./MarkedPullsList";
+
 export default {
   name: "User",
   components: {
     PullsList,
-    ReposList,
-    NewRepo
+    NewRepo,
+    MarkedPullsList
   },
   data: () => ({}),
   created() {},
@@ -50,8 +52,12 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .avatar {
   border-radius: 15%;
+}
+
+.container {
+  width: 100%;
 }
 </style>

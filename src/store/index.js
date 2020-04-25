@@ -14,6 +14,7 @@ export default new Vuex.Store({
     avatar_url: "",
     marked_repos: [],
     user_status: "user",
+    marked_pulls: [],
   },
   getters: {
     repos: (state) => {
@@ -37,6 +38,9 @@ export default new Vuex.Store({
     },
     get_marked_repos: (state) => {
       return state.marked_repos;
+    },
+    get_marked_pulls: (state) => {
+      return state.marked_pulls;
     },
     get_contracts: (state) => {
       return state.contracts;
