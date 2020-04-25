@@ -7,7 +7,9 @@
         </v-col>
         <v-col><TypeSelector /></v-col>
       </v-row>
+
       <v-row> <ContractsList /></v-row>
+
     </v-container>
     <Payments />
   </div>
