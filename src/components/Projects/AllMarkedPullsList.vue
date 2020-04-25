@@ -13,7 +13,7 @@
           </v-card-text>
 
           <v-card-actions>
-            <v-btn text>Work on repo</v-btn>
+            <v-btn text @click="changeSelected(pull)">Work on repo</v-btn>
             <v-spacer></v-spacer>
             <v-chip v-if="index%2 == 0" class="ma-2" color="teal" text-color="white" small>
               <v-avatar left small>
@@ -41,7 +41,13 @@
 <script>
 export default {
   name: "AllMarkedPullsList",
-  created() {}
+  created() {},
+  methods: {
+    changeSelected(pull) {
+      this.$store.dispatch("set_selected_pull", pull);
+      this.$router.push("SelectedPull");
+    }
+  }
 };
 </script>
 

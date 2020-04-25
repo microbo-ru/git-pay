@@ -16,6 +16,7 @@ export default new Vuex.Store({
     user_status: "user",
     marked_pulls: [],
     all_marked_pulls: [],
+    selected_pull: {},
   },
   getters: {
     repos: (state) => {
@@ -51,6 +52,10 @@ export default new Vuex.Store({
         ({ title }) => title == req_title
       )[0];
     },
+    get_selected_pull: (state) => {
+      console.log(state);
+      return state.selected_pull;
+    },
   },
   mutations: {
     UPDATE_CONTRACTS(state, contracts) {
@@ -81,6 +86,10 @@ export default new Vuex.Store({
     },
     SET_ALL_MARKED_PULLS(state, pulls) {
       state.all_marked_pulls = pulls;
+    },
+    SET_SELECTED_PULL(state, pull) {
+      state.selected_pull = pull;
+      console.log(state);
     },
   },
   actions: {
@@ -114,7 +123,7 @@ export default new Vuex.Store({
       let repos = await axios.post(`${state.server_url}/repos`, {
         username: state.username,
       });
-
+      console.log(repos);
       commit("SET_REPOS", JSON.parse(repos.data));
     },
     async fetch_marked_repos({ state, commit }) {
@@ -141,6 +150,9 @@ export default new Vuex.Store({
         pull["extra"] = JSON.parse(pull["extra"]);
       }
       commit("SET_ALL_MARKED_PULLS", pulls.data);
+    },
+    set_selected_pull({ commit }, pull) {
+      commit("SET_SELECTED_PULL", pull);
     },
   },
   modules: {},
