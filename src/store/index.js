@@ -23,6 +23,9 @@ export default new Vuex.Store({
       }
       return repo;
     },
+    get_pulls_titles: (state) => {
+      return state.pulls[state.username].items.map(({ title }) => title);
+    },
     pulls_by_author: (state) => (author) => {
       return state.pulls[author].items;
     },
@@ -37,6 +40,11 @@ export default new Vuex.Store({
     },
     get_contracts: (state) => {
       return state.contracts;
+    },
+    get_pulls_url_by_title: (state) => (req_title) => {
+      return state.pulls[state.username].items.filter(
+        ({ title }) => title == req_title
+      )[0];
     },
   },
   mutations: {

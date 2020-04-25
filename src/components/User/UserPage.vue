@@ -17,6 +17,7 @@
         <v-col>
           <div v-if="$store.state.username && $store.state.status=='empl'">
             <ReposList />
+            <NewRepo v-if="$store.getters.ready_to_show_pulls" />
           </div>
         </v-col>
         <v-col>
@@ -34,11 +35,13 @@
 <script>
 import PullsList from "../PullsList";
 import ReposList from "./ReposList";
+import NewRepo from "./NewRepo";
 export default {
   name: "User",
   components: {
     PullsList,
-    ReposList
+    ReposList,
+    NewRepo
   },
   data: () => ({}),
   created() {},
