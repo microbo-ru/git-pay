@@ -17,7 +17,7 @@
         <div v-if="$store.state.username && $store.state.status=='empl'" class="container">
           <v-row>
             <v-col md="3">
-              <h3>Добавить новый пул</h3>
+              <h3>Добавить новый pull request</h3>
               <NewRepo v-if="$store.getters.ready_to_show_pulls" />
             </v-col>
             <v-col md="9">
@@ -29,7 +29,7 @@
           </v-row>
         </div>
 
-        <div v-if="$store.state.username && $store.state.status=='user'">
+        <div v-if="$store.state.username && $store.state.status=='user'" class="container">
           <MarkedPullsList />
         </div>
       </v-row>

@@ -6,29 +6,14 @@
       action="https://api.dev.walletone.com/p2p/v2/payer"
       @submit="handleForm"
     >
-      <input
-        type="hidden"
-        name="PhoneNumber"
-        id="PhoneNumber"
-        value="+79818925700"
-      />
-      <input
-        type="hidden"
-        name="PlatformPayerId"
-        id="PlatformPayerId"
-        value="microbo"
-      />
+      <input type="hidden" name="PhoneNumber" id="PhoneNumber" value="+79818925700" />
+      <input type="hidden" name="PlatformPayerId" id="PlatformPayerId" value="microbo" />
       <input type="hidden" name="PlatformId" id="PlatformId" value="microbo" />
-      <input
-        type="hidden"
-        name="ReturnUrl"
-        id="ReturnUrl"
-        value="http://microbo.ru/w1"
-      />
+      <input type="hidden" name="ReturnUrl" id="ReturnUrl" value="http://microbo.ru/w1" />
       <input type="hidden" name="Timestamp" id="Timestamp" />
-      <input type="hidden" name="Signature" id="Signature" value="" />
+      <input type="hidden" name="Signature" id="Signature" value />
 
-      <input type="submit" value="Активировать" style="color: blue;" />
+      <input type="submit" value="Конечно заплачу" style="color: blue;" />
     </form>
   </div>
 </template>
@@ -62,8 +47,8 @@ export default {
         .update(iconv.encode(params + key, "UTF-8"))
         .digest("base64");
       document.getElementById("Signature").value = encodedKey;
-    },
-  },
+    }
+  }
 };
 </script>
 

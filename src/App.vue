@@ -11,10 +11,10 @@
       </v-toolbar-title>
       <v-container>
         <router-link to="Projects">
-          <v-btn text>Projects</v-btn>
+          <v-btn text>Задания</v-btn>
         </router-link>
         <router-link to="User">
-          <v-btn text>LK</v-btn>
+          <v-btn text>Личный кабинет</v-btn>
         </router-link>
       </v-container>
 

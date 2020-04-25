@@ -7,37 +7,20 @@
           <span class="high">Pay</span>
         </div>
         <div class="display-2" id="right">
-          The right way to
-          <span class="high">sell</span> your
+          Правильный способ
+          <span class="high">продать</span> ваши
           <span class="high">pull requests</span>
         </div>
         <div class="display-1"></div>
       </div>
     </div>
     <div width="100%" id="block2">
-      <div
-        class="display-1"
-        id="text1"
-      >A marketplace for buying and selling code, powered by Git and WalletOne.</div>
+      <div class="display-1" id="text1">Площадка для покупки и продажи кода</div>
     </div>
-    <v-row>
-      <v-col>
-        <div width="100%" class="block">
-          <h1 class="title-underline display-3">Publish your tasks</h1>
-          <h2>тут картинка</h2>
-        </div>
-      </v-col>
-      <v-divider vertical></v-divider>
-      <v-col>
-        <div width="100%" class="block">
-          <h1 class="title-underline display-3">Find a job</h1>
-          <h2>тут картинка</h2>
-        </div>
-      </v-col>
-    </v-row>
+
     <v-divider></v-divider>
     <div width="100%" class="block">
-      <h1 class="title-underline display-3">We work with</h1>
+      <h1 class="title-underline display-3">Мы работаем с:</h1>
 
       <div class="logos">
         <img
