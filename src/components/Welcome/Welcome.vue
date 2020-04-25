@@ -15,15 +15,12 @@
       </div>
     </div>
     <div width="100%" id="block2">
-      <div
-        class="display-1"
-        id="text1"
-      >Площадка для покупки и продажи кода, powered by Git and WalletOne.</div>
+      <div class="display-1" id="text1">Площадка для покупки и продажи кода</div>
     </div>
 
     <v-divider></v-divider>
     <div width="100%" class="block">
-      <h1 class="title-underline display-3">We work with</h1>
+      <h1 class="title-underline display-3">Мы работаем с:</h1>
 
       <div class="logos">
         <img
