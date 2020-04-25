@@ -17,6 +17,7 @@ export default new Vuex.Store({
     marked_pulls: [],
     all_marked_pulls: [],
     selected_pull: {},
+    users: {},
   },
   getters: {
     repos: (state) => {
@@ -43,6 +44,16 @@ export default new Vuex.Store({
     },
     get_marked_pulls: (state) => {
       return state.marked_pulls;
+    },
+    get_all_marked_pulls: (state) => {
+      let res = [];
+
+      for (let user of Object.values(state.users)) {
+        if (user.status != "empl") continue;
+        console.log(user);
+        for (let pull of user["marked_pulls"]) res.push(pull);
+      }
+      return res;
     },
     get_contracts: (state) => {
       return state.contracts;
@@ -89,7 +100,10 @@ export default new Vuex.Store({
     },
     SET_SELECTED_PULL(state, pull) {
       state.selected_pull = pull;
-      console.log(state);
+    },
+    UPDATE_USERS(state, users) {
+      state.users = users;
+      console.log(users);
     },
   },
   actions: {
@@ -153,6 +167,16 @@ export default new Vuex.Store({
     },
     set_selected_pull({ commit }, pull) {
       commit("SET_SELECTED_PULL", pull);
+    },
+    async fetch_users({ state, commit }) {
+      let users = await axios.get(`${state.server_url}/users`);
+      users = users.data;
+      for (let user in users) {
+        for (let pull of users[user]["marked_pulls"]) {
+          pull["extra"] = JSON.parse(pull["extra"]);
+        }
+      }
+      commit("UPDATE_USERS", users);
     },
   },
   modules: {},
