@@ -13,6 +13,7 @@ export default new Vuex.Store({
     repos: [],
     avatar_url: "",
     marked_repos: [],
+    user_status: "user",
   },
   getters: {
     repos: (state) => {
@@ -51,6 +52,9 @@ export default new Vuex.Store({
     UPDATE_USERNAME(state, username) {
       state.username = username;
     },
+    UPDATE_STATUS(state, status) {
+      state.status = status;
+    },
     SET_REPOS(state, repos) {
       state.repos = repos;
 
@@ -73,11 +77,18 @@ export default new Vuex.Store({
       res = JSON.parse(res.data);
       commit("UPDATE_PRS_BY_AUTHOR", { author, pulls: res });
     },
-    set_username({ commit, dispatch }, name) {
+    async set_username({ state, commit, dispatch }, name) {
       commit("UPDATE_USERNAME", name);
       dispatch("fetch_prs_by_author", name);
       dispatch("fetch_repos");
       dispatch("fetch_marked_repos");
+
+      let res = await axios.get(`${state.server_url}/users`);
+
+      let users = res.data;
+      let status = users[name]["status"];
+      console.log(users, status);
+      commit("UPDATE_STATUS", status);
     },
     async fetch_repos({ state, commit }) {
       if (!state.username) return;

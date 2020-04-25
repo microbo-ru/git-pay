@@ -1,7 +1,7 @@
 <template>
   <div>
-    <v-container
-      ><v-row>
+    <v-container>
+      <v-row>
         <v-col md="auto">
           <img
             v-if="$store.state.avatar_url"
@@ -15,18 +15,19 @@
       </v-row>
       <v-row>
         <v-col>
-          <div v-if="$store.state.username">
+          <div v-if="$store.state.username && $store.state.status=='empl'">
             <ReposList />
           </div>
         </v-col>
         <v-col>
           <div>
-            <div v-if="$store.state.username">
+            <div v-if="$store.state.username && $store.state.status=='user'">
               <PullsList v-if="$store.getters.ready_to_show_pulls" />
             </div>
           </div>
-        </v-col> </v-row
-    ></v-container>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
@@ -37,11 +38,11 @@ export default {
   name: "User",
   components: {
     PullsList,
-    ReposList,
+    ReposList
   },
   data: () => ({}),
   created() {},
-  methods: {},
+  methods: {}
 };
 </script>
 
