@@ -71,6 +71,10 @@ export default new Vuex.Store({
     SET_MARKED_REPOS(state, repos) {
       state.marked_repos = repos;
     },
+    SET_MARKED_PULLS(state, pulls) {
+      state.marked_pulls = pulls;
+      console.log(state);
+    },
   },
   actions: {
     async fetch_contracts({ state, commit }) {
@@ -90,7 +94,7 @@ export default new Vuex.Store({
       dispatch("fetch_prs_by_author", name);
       dispatch("fetch_repos");
       dispatch("fetch_marked_repos");
-
+      dispatch("fetch_marked_pulls");
       let res = await axios.get(`${state.server_url}/users`);
 
       let users = res.data;
@@ -113,6 +117,13 @@ export default new Vuex.Store({
       });
       repos.data = repos.data.map((json) => JSON.parse(json));
       commit("SET_MARKED_REPOS", repos.data);
+    },
+    async fetch_marked_pulls({ state, commit }) {
+      if (!state.username) return;
+      let pulls = await axios.post(`${state.server_url}/get_marked_pulls`, {
+        username: state.username,
+      });
+      commit("SET_MARKED_PULLS", pulls.data);
     },
   },
   modules: {},

@@ -18,6 +18,7 @@
           <div v-if="$store.state.username && $store.state.status=='empl'">
             <ReposList />
             <NewRepo v-if="$store.getters.ready_to_show_pulls" />
+            <div v-for="(pull, index) in $store.state.marked_pulls" :key="index">{{pull.html_url}}</div>
           </div>
         </v-col>
         <v-col>

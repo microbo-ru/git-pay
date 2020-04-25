@@ -27,11 +27,13 @@ export default {
     async sendData() {
       let pr = this.$store.getters.get_pulls_url_by_title(this.selected);
 
-      let res = await axios.post(`${this.$store.state.server_url}/new_pull`, {
+      await axios.post(`${this.$store.state.server_url}/new_pull`, {
         html_url: pr["html_url"],
         taskDescription: this.taskDescription,
-        price: this.price
+        price: this.price,
+        username: this.$store.state.username
       });
+      this.$store.dispatch("fetch_marked_pulls");
     }
   }
 };
