@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row dense>
-      <v-col v-for="(pull, index) in $store.state.all_marked_pulls" :key="index" cols="12">
+      <v-col v-for="(pull, index) in $store.getters.get_all_marked_pulls" :key="index" cols="12">
         <v-card dark raised>
           <v-card-title class="headline">{{ pull.extra.title }}</v-card-title>
 

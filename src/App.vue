@@ -51,6 +51,7 @@ export default {
   created() {
     this.$store.dispatch("fetch_contracts");
     this.$store.dispatch("fetch_all_marked_pulls");
+    this.$store.dispatch("fetch_users");
   },
   methods: {
     showOverlay() {
