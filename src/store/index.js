@@ -127,6 +127,9 @@ export default new Vuex.Store({
       let pulls = await axios.post(`${state.server_url}/get_marked_pulls`, {
         username: state.username,
       });
+      for (let pull of pulls.data) {
+        pull["extra"] = JSON.parse(pull["extra"]);
+      }
       commit("SET_MARKED_PULLS", pulls.data);
     },
   },

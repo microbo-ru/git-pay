@@ -9,7 +9,7 @@
       v-for="(pull, index) in $store.getters.get_marked_pulls"
       :key="index"
     >
-      <v-card-title>{{ pull.html_url }}</v-card-title>
+      <v-card-title>{{ pull.extra.title }}</v-card-title>
       <v-card-text>
         <v-row justify="space-between">
           <v-col>repo description</v-col>
