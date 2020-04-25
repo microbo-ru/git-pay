@@ -27,7 +27,7 @@
         </div>
 
         <div v-if="$store.state.username && $store.state.status=='user'">
-          <PullsList v-if="$store.getters.ready_to_show_pulls" />
+          <MarkedPullsList />
         </div>
       </v-row>
     </v-container>
@@ -35,14 +35,12 @@
 </template>
 
 <script>
-import PullsList from "../PullsList";
 import NewRepo from "./NewRepo";
 import MarkedPullsList from "./MarkedPullsList";
 
 export default {
   name: "User",
   components: {
-    PullsList,
     NewRepo,
     MarkedPullsList
   },

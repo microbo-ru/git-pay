@@ -34,6 +34,7 @@ export default {
         username: this.$store.state.username
       });
       this.$store.dispatch("fetch_marked_pulls");
+      this.$store.dispatch("fetch_all_marked_pulls");
     }
   }
 };

@@ -3,11 +3,19 @@
     <v-app-bar app color="primary" dark>
       <v-toolbar-title>
         <!--<router-link to="/"> <v-btn text x-large>GitPay </v-btn></router-link>-->
-        <router-link to="/"> <v-btn text x-large><img src="@/assets/logo_gitpay_branch.png" height="40px"> </v-btn></router-link>
+        <router-link to="/">
+          <v-btn text x-large>
+            <img src="@/assets/logo_gitpay_branch.png" height="40px" />
+          </v-btn>
+        </router-link>
       </v-toolbar-title>
       <v-container>
-        <router-link to="Projects"><v-btn text>Projects </v-btn></router-link>
-        <router-link to="User"><v-btn text>LK</v-btn></router-link>
+        <router-link to="Projects">
+          <v-btn text>Projects</v-btn>
+        </router-link>
+        <router-link to="User">
+          <v-btn text>LK</v-btn>
+        </router-link>
       </v-container>
 
       <v-btn @click="showOverlay" outlined>
@@ -38,22 +46,23 @@ export default {
   components: { Login },
 
   data: () => ({
-    overlay: false,
+    overlay: false
   }),
   created() {
     this.$store.dispatch("fetch_contracts");
+    this.$store.dispatch("fetch_all_marked_pulls");
   },
   methods: {
     showOverlay() {
       if (!this.loginState) this.overlay = !this.overlay;
       else alert("dont");
-    },
+    }
   },
   computed: {
     theme() {
       return this.$vuetify.theme.dark ? "dark" : "light";
-    },
-  },
+    }
+  }
 };
 </script>
 

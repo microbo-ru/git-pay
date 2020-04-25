@@ -15,6 +15,7 @@ export default new Vuex.Store({
     marked_repos: [],
     user_status: "user",
     marked_pulls: [],
+    all_marked_pulls: [],
   },
   getters: {
     repos: (state) => {
@@ -77,7 +78,9 @@ export default new Vuex.Store({
     },
     SET_MARKED_PULLS(state, pulls) {
       state.marked_pulls = pulls;
-      console.log(state);
+    },
+    SET_ALL_MARKED_PULLS(state, pulls) {
+      state.all_marked_pulls = pulls;
     },
   },
   actions: {
@@ -131,6 +134,13 @@ export default new Vuex.Store({
         pull["extra"] = JSON.parse(pull["extra"]);
       }
       commit("SET_MARKED_PULLS", pulls.data);
+    },
+    async fetch_all_marked_pulls({ state, commit }) {
+      let pulls = await axios.get(`${state.server_url}/get_marked_pulls`);
+      for (let pull of pulls.data) {
+        pull["extra"] = JSON.parse(pull["extra"]);
+      }
+      commit("SET_ALL_MARKED_PULLS", pulls.data);
     },
   },
   modules: {},
