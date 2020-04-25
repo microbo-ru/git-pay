@@ -1,26 +1,32 @@
-# git-pay
+# frontend_dlya_daunov
 
-Put here scenario and description
-
-## Deploy
-
-### Deploy api
-
-git remote add heroku_api https://git.heroku.com/microbo-api.git
-```shell
-git subtree push --prefix api heroku_api master
+## Project setup
+```
+npm install
 ```
 
-
-#### Deploy front
-
-git remote add heroku https://git.heroku.com/microbo.git
-
-```shell
-git subtree push --prefix front heroku master
+### Compiles and hot-reloads for development
+```
+npm run serve
 ```
 
-#### Deploy forced
-```shell
-git push heroku `git subtree split --prefix front master`:master --force
+### Compiles and minifies for production
 ```
+npm run build
+```
+
+### Run your tests
+```
+npm run test
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Logo refs:
+https://logomakr.com/1rToM4
