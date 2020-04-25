@@ -18,6 +18,7 @@ export default new Vuex.Store({
     all_marked_pulls: [],
     selected_pull: {},
     users: {},
+    agreed: {},
   },
   getters: {
     repos: (state) => {
@@ -50,7 +51,7 @@ export default new Vuex.Store({
 
       for (let user of Object.values(state.users)) {
         if (user.status != "empl") continue;
-        console.log(user);
+
         for (let pull of user["marked_pulls"]) res.push(pull);
       }
       return res;
@@ -66,6 +67,9 @@ export default new Vuex.Store({
     get_selected_pull: (state) => {
       console.log(state);
       return state.selected_pull;
+    },
+    get_agreed: (state) => {
+      return state.agreed;
     },
   },
   mutations: {
@@ -100,10 +104,18 @@ export default new Vuex.Store({
     },
     SET_SELECTED_PULL(state, pull) {
       state.selected_pull = pull;
+      console.log(state);
     },
     UPDATE_USERS(state, users) {
       state.users = users;
       console.log(users);
+    },
+    SET_AGREE(state, pull) {
+      state.agreed = {
+        empl_username: pull.username,
+        pull: pull,
+        user_username: state.username,
+      };
     },
   },
   actions: {
@@ -177,6 +189,9 @@ export default new Vuex.Store({
         }
       }
       commit("UPDATE_USERS", users);
+    },
+    set_agree({ commit }, pull) {
+      commit("SET_AGREE", pull);
     },
   },
   modules: {},

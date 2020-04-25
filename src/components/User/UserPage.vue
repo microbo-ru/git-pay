@@ -24,6 +24,9 @@
               <MarkedPullsList />
             </v-col>
           </v-row>
+          <v-row>
+            <Agreed />
+          </v-row>
         </div>
 
         <div v-if="$store.state.username && $store.state.status=='user'">
@@ -37,12 +40,14 @@
 <script>
 import NewRepo from "./NewRepo";
 import MarkedPullsList from "./MarkedPullsList";
+import Agreed from "./Agreed";
 
 export default {
   name: "User",
   components: {
     NewRepo,
-    MarkedPullsList
+    MarkedPullsList,
+    Agreed
   },
   data: () => ({}),
   created() {},

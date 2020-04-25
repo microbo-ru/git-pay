@@ -45,7 +45,7 @@ export default {
   methods: {
     changeSelected(pull) {
       this.$store.dispatch("set_selected_pull", pull);
-      this.$router.push("SelectedPull");
+      this.$router.push({ path: "/selected_pull" });
     }
   }
 };
