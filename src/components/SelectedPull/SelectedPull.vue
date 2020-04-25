@@ -27,6 +27,7 @@ export default {
   methods: {
     test() {
       this.$store.dispatch("set_agree", this.$store.getters.get_selected_pull);
+      window.alert("Тогда начинайте работать!");
     }
   }
 };
