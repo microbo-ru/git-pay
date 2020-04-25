@@ -12,8 +12,8 @@
       <v-card-title>{{ pull.extra.title }}</v-card-title>
       <v-card-text>
         <v-row justify="space-between">
-          <v-col>repo description</v-col>
-          <v-col md="auto">repo price</v-col>
+          <v-col>{{pull.taskDescription}}</v-col>
+          <v-col md="auto">{{pull.price}}</v-col>
         </v-row>
       </v-card-text>
     </v-card>
