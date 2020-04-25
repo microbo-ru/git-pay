@@ -39,9 +39,9 @@ export default {
   name: "Payments",
   methods: {
     handleForm() {
-      var key = "TZvds4HWduo6unK9emOFzIuRHXMueUXUREk15tSDdJ2yY0x7TJuDUD";
+      const key = "TZvds4HWduo6unK9emOFzIuRHXMueUXUREk15tSDdJ2yY0x7TJuDUD";
 
-      var date = moment()
+      const date = moment()
         .utc()
         .format("YYYY-MM-DDTHH:mm:ss");
       document.getElementById("Timestamp").value = date;
@@ -49,19 +49,18 @@ export default {
       // с добавлением в конец «секретного ключа» площадки. Полученное после объединения параметров и «секретного ключа» значение, представленное в кодировке UTF-8,
       // хешируется выбранным методом формирования ЭЦП и его байтовое представление кодируется в Base64.
       //Signature = Base64(SignatureMethod(UTF8(Sort(Params) + SignatureKey)))
-      var params =
+      const params =
         document.getElementById("PhoneNumber").value +
         document.getElementById("PlatformPayerId").value +
         document.getElementById("PlatformId").value +
         document.getElementById("ReturnUrl").value +
         date;
-      var crypto = require("crypto");
-      var iconv = require("iconv-lite");
-      var encodedKey = crypto
+      const crypto = require("crypto");
+      const iconv = require("iconv-lite");
+      const encodedKey = crypto
         .createHash("sha256")
         .update(iconv.encode(params + key, "UTF-8"))
         .digest("base64");
-      console.log("encodedKey:" + encodedKey);
       document.getElementById("Signature").value = encodedKey;
     },
   },

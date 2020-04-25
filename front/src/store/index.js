@@ -55,7 +55,6 @@ export default new Vuex.Store({
       state.repos = repos;
 
       state.avatar_url = state.repos[0].owner.avatar_url;
-      console.log(state);
     },
     SET_MARKED_REPOS(state, repos) {
       state.marked_repos = repos;
@@ -67,7 +66,6 @@ export default new Vuex.Store({
       let contracts;
       if ("data" in res) contracts = res["data"];
       else return;
-      console.log(contracts);
       commit("UPDATE_CONTRACTS", contracts);
     },
     async fetch_prs_by_author({ state, commit }, author) {

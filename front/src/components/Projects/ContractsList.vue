@@ -20,9 +20,7 @@
 <script>
 export default {
   name: "ContractsList",
-  created() {
-    console.log(this.$store.getters.repos);
-  },
+  created() {},
 };
 </script>
 
