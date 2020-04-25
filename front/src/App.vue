@@ -2,7 +2,8 @@
   <v-app :style="{ background: $vuetify.theme.themes[theme].background }">
     <v-app-bar app color="primary" dark>
       <v-toolbar-title>
-        <router-link to="/"> <v-btn text x-large>GitPay </v-btn></router-link>
+        <!--<router-link to="/"> <v-btn text x-large>GitPay </v-btn></router-link>-->
+        <router-link to="/"> <v-btn text x-large><img src="@/assets/logo_gitpay_branch.png" height="40px"> </v-btn></router-link>
       </v-toolbar-title>
       <v-container>
         <router-link to="Projects"><v-btn text>Projects </v-btn></router-link>
