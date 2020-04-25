@@ -2,7 +2,7 @@
   <v-container>
     <v-row dense>
       <v-col v-for="(pull, index) in $store.getters.get_all_marked_pulls" :key="index" cols="12">
-        <v-card dark raised>
+        <v-card raised>
           <v-card-title class="headline">{{ pull.extra.title }}</v-card-title>
 
           <v-card-text>
@@ -20,14 +20,7 @@
                 <v-icon small>mdi-checkbox-marked-circle</v-icon>
               </v-avatar>Verified
             </v-chip>
-            <v-chip
-              v-if="index%3 == 0"
-              class="ma-2"
-              color="orange"
-              text-color="white"
-              outlined
-              small
-            >
+            <v-chip v-if="index%3 == 0" class="ma-2" color="orange" text-color="white" small>
               Premium
               <v-icon right small>mdi-star</v-icon>
             </v-chip>

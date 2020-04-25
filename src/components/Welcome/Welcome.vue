@@ -20,18 +20,52 @@
         id="text1"
       >A marketplace for buying and selling code, powered by Git and WalletOne.</div>
     </div>
-    <div width="100%" class="block">
-      <h1 class="title-underline display-3">Publish your tasks</h1>
-      <h2>тут картинка</h2>
-    </div>
+    <v-row>
+      <v-col>
+        <div width="100%" class="block">
+          <h1 class="title-underline display-3">Publish your tasks</h1>
+          <h2>тут картинка</h2>
+        </div>
+      </v-col>
+      <v-divider vertical></v-divider>
+      <v-col>
+        <div width="100%" class="block">
+          <h1 class="title-underline display-3">Find a job</h1>
+          <h2>тут картинка</h2>
+        </div>
+      </v-col>
+    </v-row>
     <v-divider></v-divider>
     <div width="100%" class="block">
-      <h1 class="title-underline display-3">Find a job</h1>
-      <h2>тут картинка</h2>
-    </div>
-    <div width="100%" class="block">
       <h1 class="title-underline display-3">We work with</h1>
-      <h2>здесь логотипы всякие</h2>
+
+      <div class="logos">
+        <img
+          class="logo"
+          src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"
+          height="100rem"
+          width="100rem"
+        />
+
+        <img
+          class="logo"
+          src="https://www.walletone.com/wp-content/uploads/logos/w1.png"
+          height="90rem"
+          width="100rem"
+        />
+        <img
+          class="logo"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Emblem_of_the_Federal_Tax_Service.svg/1200px-Emblem_of_the_Federal_Tax_Service.svg.png"
+          height="100rem"
+          width="100rem"
+        />
+        <img
+          class="logo"
+          src="https://banner2.cleanpng.com/20180804/wge/kisspng-airtable-database-spreadsheet-logo-application-sof-airtable-for-mac-free-download-and-software-revi-5b65a4915ca291.2247377715333879213794.jpg"
+          height="100rem"
+          width="100rem"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -92,5 +126,11 @@ export default {
   display: inline-block;
   padding-bottom: 10px;
   padding-top: 2.5rem;
+}
+.logo {
+  margin: 10px 10px 10px 10px;
+}
+.logos {
+  margin-top: 20px;
 }
 </style>
