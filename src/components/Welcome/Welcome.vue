@@ -20,22 +20,7 @@
         id="text1"
       >Площадка для покупки и продажи кода, powered by Git and WalletOne.</div>
     </div>
-<<<<<<< Updated upstream
-    <v-row>
-      <v-col>
-        <div width="100%" class="block">
-          <h1 class="title-underline display-3">Publish your tasks</h1>
-          <h2>тут картинка</h2>
-        </div>
-      </v-col>
-      <v-divider vertical></v-divider>
-      <v-col>
-        <div width="100%" class="block">
-          <h1 class="title-underline display-3">Find a job</h1>
-          <h2>тут картинка</h2>
-        </div>
-      </v-col>
-    </v-row>
+
     <v-divider></v-divider>
     <div width="100%" class="block">
       <h1 class="title-underline display-3">We work with</h1>
@@ -67,20 +52,6 @@
           width="100rem"
         />
       </div>
-=======
-    <div width="100%" class="block">
-      <h1 class="title-underline display-3">Опубликовать ваше задание</h1>
-      <h2>тут картинка</h2>
-    </div>
-    <v-divider></v-divider>
-    <div width="100%" class="block">
-      <h1 class="title-underline display-3">Найти работу</h1>
-      <h2>тут картинка</h2>
-    </div>
-    <div width="100%" class="block">
-      <h1 class="title-underline display-3">Мы работаем с:</h1>
-      <h2>здесь логотипы всякие</h2>
->>>>>>> Stashed changes
     </div>
   </div>
 </template>
