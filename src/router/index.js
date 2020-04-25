@@ -6,6 +6,7 @@ import UserPage from "../components/User/UserPage";
 import Projects from "../components/Projects/Projects";
 import Project from "../components/Project/Project";
 import SelectedPull from "../components/SelectedPull/SelectedPull";
+import W1Callback from "../components/W1Callback/W1Callback";
 
 Vue.use(VueRouter);
 
@@ -34,6 +35,11 @@ const routes = [
     path: "/selected_pull",
     name: "SelectedPull",
     component: SelectedPull,
+  },
+  {
+    path: "/w1",
+    name: "W1Callback",
+    component: W1Callback,
   },
 ];
 

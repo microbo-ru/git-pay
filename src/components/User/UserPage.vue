@@ -34,6 +34,7 @@
         </div>
       </v-row>
     </v-container>
+    <Payments />
   </div>
 </template>
 
@@ -41,13 +42,15 @@
 import NewRepo from "./NewRepo";
 import MarkedPullsList from "./MarkedPullsList";
 import Agreed from "./Agreed";
+import Payments from "../Payments";
 
 export default {
   name: "User",
   components: {
     NewRepo,
     MarkedPullsList,
-    Agreed
+    Agreed,
+    Payments
   },
   data: () => ({}),
   created() {},

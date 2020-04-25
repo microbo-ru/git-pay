@@ -14,21 +14,18 @@
         <AllMarkedPullsList />
       </v-row>
     </v-container>
-    <Payments />
   </div>
 </template>
 
 <script>
 import AllMarkedPullsList from "./AllMarkedPullsList";
 import TypeSelector from "./TypeSelector";
-import Payments from "../Payments";
 
 export default {
   name: "Projects",
   components: {
     AllMarkedPullsList,
-    TypeSelector,
-    Payments
+    TypeSelector
   }
 };
 </script>

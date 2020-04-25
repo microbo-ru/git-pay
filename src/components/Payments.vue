@@ -28,7 +28,7 @@
       <input type="hidden" name="Timestamp" id="Timestamp" />
       <input type="hidden" name="Signature" id="Signature" value="" />
 
-      <input type="submit" value="submit" style="color: blue;" />
+      <input type="submit" value="Активировать" style="color: blue;" />
     </form>
   </div>
 </template>
