@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <h1>Список контрактов</h1>
+  <div class="container">
     <v-card
       class="repo"
       raised
@@ -27,4 +26,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.container {
+  width: 100%;
+}
+</style>
