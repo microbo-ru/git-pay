@@ -1,4 +1,4 @@
-# frontend_dlya_daunov
+# Frontend
 
 ## Project setup
 ```
