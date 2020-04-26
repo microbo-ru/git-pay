@@ -54,7 +54,7 @@ export default new Vuex.Store({
 
         for (let pull of user["marked_pulls"]) res.push(pull);
       }
-      return res;
+      return res.reverse();
     },
     get_contracts: (state) => {
       return state.contracts;
@@ -97,10 +97,10 @@ export default new Vuex.Store({
       state.marked_repos = repos;
     },
     SET_MARKED_PULLS(state, pulls) {
-      state.marked_pulls = pulls;
+      state.marked_pulls = pulls.reverse();
     },
     SET_ALL_MARKED_PULLS(state, pulls) {
-      state.all_marked_pulls = pulls;
+      state.all_marked_pulls = pulls.reverse();
     },
     SET_SELECTED_PULL(state, pull) {
       state.selected_pull = pull;
