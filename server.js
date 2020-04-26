@@ -7,7 +7,7 @@ app.use(serveStatic(__dirname + "/dist"));
 
 app.post('/w1',function(req,res){
     console.log(req);
-    res.send({redirect: '/Projects'});
+    res.send(307, '/Projects');
   });
 
 var port = process.env.PORT || 5000;
