@@ -1,5 +1,20 @@
 <template>
+
   <div>
+
+    <v-card v-slot:extension>
+      <v-tabs align-with-title>
+        <v-tabs-slider color="yellow"></v-tabs-slider>
+        <v-tab>Обзор</v-tab>
+        <v-tab>Проекты</v-tab>
+        <v-tab>Пулл реквесты</v-tab>
+        <v-tab>Настройки</v-tab>
+        <v-spacer></v-spacer>
+        <v-tab>Последние действия</v-tab>
+      </v-tabs>
+    </v-card>
+
+
     <v-container>
       <v-row>
         <v-col md="auto">

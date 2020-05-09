@@ -7,6 +7,12 @@ import Projects from "../components/Projects/Projects";
 import Project from "../components/Project/Project";
 import SelectedPull from "../components/SelectedPull/SelectedPull";
 import W1Callback from "../components/W1Callback/W1Callback";
+import Dashboard from "../components/Dashboard/Dashboard";
+import OverviewTab from "../components/Dashboard/OverviewTab";
+import ReposTab from "../components/Dashboard/ReposTab";
+import PullsTab from "../components/Dashboard/PullsTab";
+import ActivityTab from "../components/Dashboard/ActivityTab";
+import SettingsTab from "../components/Dashboard/SettingsTab";
 
 Vue.use(VueRouter);
 
@@ -40,6 +46,37 @@ const routes = [
     path: "/w1",
     name: "W1Callback",
     component: W1Callback,
+  },
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    component: Dashboard,
+    children: [
+      {
+        path: "",
+        component: OverviewTab
+      },
+      {
+        path: "/overview",
+        component: OverviewTab
+      },
+      {
+        path: "/repos",
+        component: ReposTab
+      },
+      {
+        path: "/pulls",
+        component: PullsTab
+      },
+      {
+        path: "/activity",
+        component: ActivityTab
+      },
+      {
+        path: "/settings",
+        component: SettingsTab
+      }
+    ]
   },
 ];
 
