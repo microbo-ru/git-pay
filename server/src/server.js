@@ -40,4 +40,9 @@ app.all("*", (_req, res) => {
 
 const server = app.listen(port, () => {
     console.log('Server started, listening on port %s...', server.address().port);
+
+    console.log('Using AIRTABLE_API_KEY =', process.env.AIRTABLE_API_KEY);
+    console.log('Using AIRTABLE_DB_NAME =', process.env.AIRTABLE_DB_NAME);
+    console.log('Using W1_PLATFORM_ID =', process.env.W1_PLATFORM_ID);
+    console.log('Using W1_PLATFORM_SECRET =', process.env.W1_PLATFORM_SECRET);
 });
