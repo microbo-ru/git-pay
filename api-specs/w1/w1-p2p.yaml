@@ -17,7 +17,7 @@ info:
     name: "Apache 2.0"
     #url: "https://github.com/OAI/OpenAPI-Specification/blob/master/https://www.apache.org/licenses/LICENSE-2.0.html"
 
-  version: "0.0.2"
+  version: "0.0.3"
 
 servers:
   - url: "https://api.dev.walletone.com/p2p"
@@ -241,7 +241,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/NewDealRequest"
+                $ref: "#/components/schemas/DealInfo"
 
 components:
 

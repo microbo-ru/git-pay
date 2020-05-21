@@ -1,6 +1,6 @@
 {
   "name": "w1_p2_p_api",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Wallet_One_p2p_API_implementaion_Is_developed_as_a_part_of_gitpay_ru_project_by_Microbo_team",
   "license": "Apache 2.0",
   "main": "dist/index.js",

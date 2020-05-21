@@ -235,7 +235,7 @@ No authorization required
 
 ## w1GetDealInfo
 
-> W1NewDealRequest w1GetDealInfo(platformDealId, xWalletPlatformId, xWalletSignature, xWalletTimestamp)
+> W1DealInfo w1GetDealInfo(platformDealId, xWalletPlatformId, xWalletSignature, xWalletTimestamp)
 
 Получение статуса сделки
 
@@ -272,7 +272,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**W1NewDealRequest**](W1NewDealRequest.md)
+[**W1DealInfo**](W1DealInfo.md)
 
 ### Authorization
 
