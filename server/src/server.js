@@ -4,21 +4,33 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
 const history = require('connect-history-api-fallback');
+const oas3Tools = require('oas3-tools');
 
-const app = express();
-const port = process.env.PORT || 8081;
+// ### START of auto-generated code block
+// swaggerRouter configuration
+var options = {
+    controllers: path.join(__dirname, './controllers')
+};
+
+var expressAppConfig = oas3Tools.expressAppConfig(path.join(__dirname, 'api/openapi.yaml'), options);
+expressAppConfig.addValidator();
+var app = expressAppConfig.getApp();
+
+// ### END of auto-generated code block
 
 app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.urlencoded({extended: true}));
 
+/*
 // more specific routes go first
 app.get('/api', (req, res) => {
     res.send({
         message: 'hello world'
     });
 });
+ */
 
 // shall server static files from Vuew first
 const publicDist = path.join(__dirname, '../../client/dist');
@@ -30,7 +42,9 @@ app.use(history({
     index: publicDist + '/index.html'
 }));
 
-app.all("*", (_req, res) => {
+// regexp to exclude not /api/.. OR api/..
+// but will work only for application/json
+app.all(/^(?!\/?api).*/, (_req, res) => {
     try {
         res.sendFile(publicDist + '/index.html');
     } catch (error) {
@@ -38,8 +52,11 @@ app.all("*", (_req, res) => {
     }
 });
 
-const server = app.listen(port, () => {
-    console.log('Server started, listening on port %s...', server.address().port);
+
+const serverPort = process.env.PORT || 8081;
+const server = app.listen(serverPort, () => {
+    console.log('Your server is listening on port %d (http://localhost:%d)', serverPort, serverPort);
+    console.log('Swagger-ui is available on http://localhost:%d/docs', serverPort);
 
     console.log('Using AIRTABLE_API_KEY =', process.env.AIRTABLE_API_KEY);
     console.log('Using AIRTABLE_DB_NAME =', process.env.AIRTABLE_DB_NAME);

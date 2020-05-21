@@ -28,7 +28,6 @@ paths:
     get:
       summary: "Returns a list of registered repositories"
       operationId: "getRegisteredRepos"
-      x-swagger-router-controller: Repos
       responses:
         200:
           description: "OK"
@@ -43,7 +42,6 @@ paths:
     get:
       summary: "Returns a list of registered pull-requests"
       operationId: "getRegisteredPulls"
-      x-swagger-router-controller: Repos
       responses:
         200:
           description: "OK"
@@ -59,7 +57,7 @@ paths:
     get:
       summary: "Returns a list of registered deals"
       operationId: "getRegisteredDeals"
-      x-swagger-router-controller: Deals
+      x-openapi-router-controller: Deals
       responses:
         200:
           description: "OK"
@@ -73,7 +71,6 @@ paths:
     post:
       summary: "Creates a new deal"
       operationId: "addNewDeal"
-      x-swagger-router-controller: Deals
       requestBody:
         required: true
         content:
@@ -94,7 +91,6 @@ paths:
     get:
       summary: "Retriee deal details & status"
       operationId: "getDealDetails"
-      x-swagger-router-controller: Deals
       parameters:
         - name: "platformDealId"
           in: path
@@ -112,7 +108,6 @@ paths:
     delete:
       summary: "Remove deal, e.g. if its not accepted yet or just orphan"
       operationId: "deleteDeal"
-      x-swagger-router-controller: Deals
       parameters:
         - name: "platformDealId"
           in: path
@@ -131,7 +126,6 @@ paths:
     post:
       summary: "Accept deal byt Payer"
       operationId: "acceptDeal"
-      x-swagger-router-controller: Deals
       parameters:
         - name: "platformDealId"
           in: path
@@ -150,7 +144,6 @@ paths:
     post:
       summary: "Cancel deal, either by Payer or by Benificiar"
       operationId: "cancelDeal"
-      x-swagger-router-controller: Deals
       parameters:
         - name: "platformDealId"
           in: path
@@ -169,7 +162,6 @@ paths:
     post:
       summary: "Commit & pay for the deal"
       operationId: "commitDeal"
-      x-swagger-router-controller: Deals
       parameters:
         - name: "platformDealId"
           in: path
@@ -198,6 +190,25 @@ components:
                 type: string
 
   schemas:
+
+    DealState:
+      type: "string"
+      enum:
+        - Created
+        - Paid
+        - PayoutProcessError
+        - CancelError
+        - PayoutProcessing
+        - Completed
+        - PaymentHold
+        - Canceling
+        - Canceled
+
+    DealType:
+      type: "string"
+      enum:
+        - Deferred
+        - Instant
 
     ArrayOfRepos:
       type: array
