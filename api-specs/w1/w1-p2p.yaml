@@ -17,11 +17,11 @@ info:
     name: "Apache 2.0"
     #url: "https://github.com/OAI/OpenAPI-Specification/blob/master/https://www.apache.org/licenses/LICENSE-2.0.html"
 
-  version: "0.0.1"
+  version: "0.0.2"
 
 servers:
   - url: "https://api.dev.walletone.com/p2p"
-    description: "An entry point for accessing My-Instruments"
+    description: "An entry point for accessing API"
 
 paths:
 
