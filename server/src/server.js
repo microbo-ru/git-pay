@@ -38,6 +38,6 @@ app.all("*", (_req, res) => {
     }
 });
 
-app.listen(port, () => {
-    console.log('Server started');
+const server = app.listen(port, () => {
+    console.log('Server started, listening on port %s...', server.address().port);
 });
