@@ -1,0 +1,424 @@
+openapi: 3.0.0
+
+info:
+  title: "W1 P2P API"
+
+  description: >
+    Wallet One p2p API implementaion
+    Is developed as a part of gitpay.ru project by Microbo team
+
+  termsOfService: "http://gitpay.ru/terms/"
+
+  contact:
+    name: "Aleksandr A. Davydenko"
+    email: "alexandrdavydenko@yandex.ru"
+
+  license:
+    name: "Apache 2.0"
+    #url: "https://github.com/OAI/OpenAPI-Specification/blob/master/https://www.apache.org/licenses/LICENSE-2.0.html"
+
+  version: "0.0.3"
+
+servers:
+  - url: "https://api.dev.walletone.com/p2p"
+    description: "An entry point for accessing API"
+
+paths:
+
+  /v2/beneficiary:
+    post:
+      summary: "Добавление (привязка) карты исполнителя"
+      operationId: "W1_addBenificiary"
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/BenificiaryInfo"
+      responses:
+        "200":
+          description: "OK"
+
+  /v2/deal/pay:
+    post:
+      summary: "Оплата сделки"
+      operationId: "W1_payDeal"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DealPayInfo"
+      responses:
+        "200":
+          description: "OK"
+
+  /v3/deals:
+    post:
+      summary: "Регистрация сделки"
+      operationId: "W1_createDeal"
+      description: >
+        Передача повторного запроса с другими параметрами приведет к изменению параметров сделки, в случае, если сделка находится в состоянии Created или PaymentProcessError.
+        Если состояние сделки уже изменилось и переданные параметры отличаются, то запрос вернет ошибку DEAL_PARAMS_MISMATCH, в противном случае вернется информация о сделке.
+        При попытке изменить тип сделки возвращается ошибка DEAL_PARAMS_MISMATCH.
+      parameters:
+        - name: X-Wallet-PlatformId
+          description: "Текстовый идентификатор площадки"
+          in: header
+          required: true
+          schema:
+            type: "string"
+        - name: X-Wallet-Signature
+          description: "ЭЦП ответа сервера, Base64-encoded"
+          in: header
+          required: true
+          schema:
+            type: "string"
+            format: "byte"
+        - name: X-Wallet-Timestamp
+          description: "Дата формирования ответа в часовом поясе и формате аналогичном дате формирования запроса, формат yyyy-MM-ddTHH:mm:ss"
+          in: header
+          required: true
+          schema:
+            type: "string"
+            format: "date-time"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewDealRequest"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DealInfo"
+
+  /v3/deals/{platformDealId}/complete:
+    post:
+      summary: "Завершение сделки"
+      operationId: "W1_completeDeal"
+      description: >
+        Метод инициирует выплату исполнителю по сделке.
+        Завершаемая сделка должна находится в одном из состояний: Paid, PayoutProcessError или CancelError (АД: имеется в виду на выходе из метода). В противном случае метод завершится с ошибкой DEAL_STATE_ID_ERROR.
+        При успешном выполнении, метод вернет объект сделки в состоянии обработки PayoutProcessing. Это означает, что в данный момент производится выплата, по окончанию которой сделка перейдет в Completed при успешном исходе и PayoutProcessError при неуспешном.
+        За изменением состояний сделки можно следить посредством получения уведомлений или используя метод получения статуса сделки.
+      parameters:
+        - name: "platformDealId"
+          in: path
+          required: true
+          schema:
+            type: "string"
+        - name: X-Wallet-PlatformId
+          description: "Текстовый идентификатор площадки"
+          in: header
+          required: true
+          schema:
+            type: "string"
+        - name: X-Wallet-Signature
+          description: "ЭЦП ответа сервера, Base64-encoded"
+          in: header
+          required: true
+          schema:
+            type: "string"
+            format: "byte"
+        - name: X-Wallet-Timestamp
+          description: "Дата формирования ответа в часовом поясе и формате аналогичном дате формирования запроса, формат yyyy-MM-ddTHH:mm:ss"
+          in: header
+          required: true
+          schema:
+            type: "string"
+            format: "date-time"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewDealRequest"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DealInfo"
+
+  /v3/deals/{platformDealId}/cancel:
+    post:
+      summary: "Отмена  сделки"
+      operationId: "W1_cancelDeal"
+      description: >
+        Метод инициирует возврат плательщику по сделке.
+        Отменяемая сделка должна находится в одном из состояний: Paid, PaymentHold, PayoutProcessError или CancelError. В противном случае метод завершится с ошибкой DEAL_STATE_ID_ERROR.
+        Если сделка находится в состоянии PaymentHold, то при успешном выполнении, метод вернет объект сделки в состоянии обработки PaymentHoldProcessing.
+        Это означает, что в данный момент производится отмена холда средств на карте плательщика, по окончанию которой сделка перейдет в Canceled при успешном исходе и CancelError при неуспешном.
+        Если сделка находится в состоянии Paid, PayoutProcessError или CancelError, то при успешном выполнении, метод вернет объект сделки в состоянии обработки Canceling.
+        Это означает, что в данный момент производится выплата, по окончанию которой сделка перейдет в Canceled при успешном исходе и CancelError при неуспешном.
+        За изменением состояний сделки можно следить посредством получения уведомлений или используя метод получения статуса сделки.
+      parameters:
+        - name: "platformDealId"
+          in: path
+          required: true
+          schema:
+            type: "string"
+        - name: X-Wallet-PlatformId
+          description: "Текстовый идентификатор площадки"
+          in: header
+          required: true
+          schema:
+            type: "string"
+        - name: X-Wallet-Signature
+          description: "ЭЦП ответа сервера, Base64-encoded"
+          in: header
+          required: true
+          schema:
+            type: "string"
+            format: "byte"
+        - name: X-Wallet-Timestamp
+          description: "Дата формирования ответа в часовом поясе и формате аналогичном дате формирования запроса, формат yyyy-MM-ddTHH:mm:ss"
+          in: header
+          required: true
+          schema:
+            type: "string"
+            format: "date-time"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewDealRequest"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DealInfo"
+
+  /v3/deals/{platformDealId}:
+    get:
+      summary: "Получение статуса сделки"
+      operationId: "W1_getDealInfo"
+      description: >
+        Метод инициирует возврат плательщику по сделке.
+        Отменяемая сделка должна находится в одном из состояний: Paid, PaymentHold, PayoutProcessError или CancelError. В противном случае метод завершится с ошибкой DEAL_STATE_ID_ERROR.
+        Если сделка находится в состоянии PaymentHold, то при успешном выполнении, метод вернет объект сделки в состоянии обработки PaymentHoldProcessing.
+        Это означает, что в данный момент производится отмена холда средств на карте плательщика, по окончанию которой сделка перейдет в Canceled при успешном исходе и CancelError при неуспешном.
+        Если сделка находится в состоянии Paid, PayoutProcessError или CancelError, то при успешном выполнении, метод вернет объект сделки в состоянии обработки Canceling.
+        Это означает, что в данный момент производится выплата, по окончанию которой сделка перейдет в Canceled при успешном исходе и CancelError при неуспешном.
+        За изменением состояний сделки можно следить посредством получения уведомлений или используя метод получения статуса сделки.
+      parameters:
+        - name: "platformDealId"
+          in: path
+          required: true
+          schema:
+            type: "string"
+        - name: X-Wallet-PlatformId
+          description: "Текстовый идентификатор площадки"
+          in: header
+          required: true
+          schema:
+            type: "string"
+        - name: X-Wallet-Signature
+          description: "ЭЦП ответа сервера, Base64-encoded"
+          in: header
+          required: true
+          schema:
+            type: "string"
+            format: "byte"
+        - name: X-Wallet-Timestamp
+          description: "Дата формирования ответа в часовом поясе и формате аналогичном дате формирования запроса, формат yyyy-MM-ddTHH:mm:ss"
+          in: header
+          required: true
+          schema:
+            type: "string"
+            format: "date-time"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DealInfo"
+
+components:
+
+  responses:
+    ErrorResponse:
+      description: "Some exception occuried"
+      content:
+        applciation/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+
+  schemas:
+
+    BenificiaryInfo:
+      type: "object"
+      properties:
+        PlatformId:
+          type: "string"
+          description: "Идентификатор площадки"
+        PlatformBeneficiaryId:
+          type: "string"
+          description: "Идентификатор исполнителя на стороне площадки"
+        Title:
+          type: "string"
+          description: "Наименование исполнителя (опционально)"
+        ReturnUrl:
+          type: "string"
+          description: "Урл возврата пользователя"
+        PaymentTypeId:
+          type: "string"
+          description: "Способ оплаты. Перейти к добавлению/выбору инструмента оплаты конкретного способа. Если не передан выбирается способ по умолчанию."
+        RedirectToPaymentToolAddition:
+          type: "string"
+          description: "Перейти сразу к добавлению нового инструмента. Происходит при передаче значения 'True'."
+        Signature:
+          type: "string"
+          format: "byte"
+          description: "Подпись запроса"
+        Timestamp:
+          type: "string"
+          format: "date-time"
+          description: "Дата формирования запроса в часовом поясе UTC+0"
+        PhoneNumber:
+          type: "string"
+          description:
+        Language:
+          type: "string"
+          description: "Язык интерфейса платежных страниц. Доступны ru, en."
+      required: ["PlatformId", "PlatformBeneficiaryId", "PhoneNumber", "ReturnUrl", "Signature", "Timestamp"]
+
+    DealPayInfo:
+      type: "object"
+      properties:
+        PlatformId:
+          type: "string"
+          description: "Идентификатор площадки"
+        PlatformDealId:
+          type: "string"
+          description: "Идентификатор сделки на стороне площадки"
+        AuthData:
+          type: "string"
+          description: "Некоторые способы оплаты поддерживают передачу авторизационных данных из площадки, позволяя плательщику миновать платежные страницы и сразу инициировать оплату."
+        ReturnUrl:
+          type: "string"
+          description: "Урл возврата пользователя"
+        RedirectToCardAddition:
+          type: "string"
+          description: "Перейти сразу к добавлению нового инструмента оплаты. Происходит при передаче значения 'True'."
+        PaymentTypeId:
+          type: "string"
+          description: "Способ оплаты. Перейти к добавлению/выбору инструмента оплаты конкретного способа. Если не передан выбирается способ по умолчанию."
+        Signature:
+          type: "string"
+          format: "byte"
+          description: "Подпись запроса"
+        Timestamp:
+          type: "string"
+          format: "date-time"
+          description: "Дата формирования запроса в часовом поясе UTC+0"
+        Language:
+          type: "string"
+          description: "Язык интерфейса платежных страниц. Доступны ru, en."
+      required: ["PlatformId", "PlatformDealId", "ReturnUrl", "PaymentTypeId", "Signature", "Timestamp"]
+
+    NewDealRequest:
+      type: "object"
+      properties:
+        PlatformDealId:
+          type: "string"
+        PlatformPayerId:
+          type: "string"
+        PayerPhoneNumber:
+          type: "string"
+        PayerPaymentToolId:
+          type: "integer"
+          description: "=1, опциональный параметр"
+        PlatformBeneficiaryId:
+          type: "string"
+        BeneficiaryPaymentToolId:
+          type: "integer"
+          description: "=1, опциональный параметр"
+        Amount:
+          type: "number"
+        CurrencyId:
+          type: "number"
+          description: "=643"
+        ShortDescription:
+          type: "string"
+        FullDescription:
+          type: "string"
+        DeferPayout:
+          type: "boolean"
+          description: "При значении false создается online (Instant) сделка"
+
+    DealState:
+      type: "string"
+      enum:
+        - Created
+        - Paid
+        - PayoutProcessError
+        - CancelError
+        - PayoutProcessing
+        - Completed
+        - PaymentHold
+        - Canceling
+        - Canceled
+
+    DealType:
+      type: "string"
+      enum:
+        - Deferred
+        - Instant
+
+    DealInfo:
+      type: "object"
+      properties:
+        PlatformDealId:
+          type: "string"
+        DealStateId:
+          $ref: "#/components/schemas/DealState"
+        CreateDate:
+          type: "string"
+          format: "date-time"
+          example: "2015-01-07T21:45:33"
+        UpdateDate:
+          type: "string"
+          format: "date-time"
+        ExpireDate:
+          type: "string"
+          format: "date-time"
+        Amount:
+          type: "number"
+        CurrencyId:
+          type: "integer"
+        PlatformPayerId:
+          type: "string"
+        PayerPhoneNumber:
+          type: "string"
+        PayerPaymentToolId:
+          type: "integer"
+        PlatformBeneficiaryId:
+          type: "string"
+        BeneficiaryPaymentToolId:
+          type: "string"
+        ShortDescription:
+          type: "integer"
+        FullDescription:
+          type: "string"
+        DealTypeId:
+          $ref: "#/components/schemas/DealType"
+        LastErrorCode:
+          type: "string"
+        LastErrorMessage:
+          type: "string"
+
+
+

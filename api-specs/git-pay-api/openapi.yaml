@@ -1,0 +1,282 @@
+openapi: 3.0.0
+
+info:
+  title: "GitPay API"
+
+  description: >
+    Is developed as a part of gitpay.ru project by Microbo team
+
+  termsOfService: "http://gitpay.ru/terms/"
+
+  contact:
+    name: "Aleksandr A. Davydenko"
+    email: "alexandrdavydenko@yandex.ru"
+
+  license:
+    name: "Apache 2.0"
+    #url: "https://github.com/OAI/OpenAPI-Specification/blob/master/https://www.apache.org/licenses/LICENSE-2.0.html"
+
+  version: "0.0.1"
+
+servers:
+  - url: "/api/v1"
+    description: "An entry point for accessing API"
+
+paths:
+
+  /repos:
+    get:
+      summary: "Returns a list of registered repositories"
+      operationId: "getRegisteredRepos"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ArrayOfRepos"
+
+  /pulls:
+    get:
+      summary: "Returns a list of registered pull-requests"
+      operationId: "getRegisteredPulls"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ArrayOfPullRequests"
+
+
+  /deals:
+    get:
+      summary: "Returns a list of registered deals"
+      operationId: "getRegisteredDeals"
+      x-openapi-router-controller: Deals
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ArrayOfDeals"
+
+    post:
+      summary: "Creates a new deal"
+      operationId: "addNewDeal"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DealInfo"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/DealInfo"
+
+  /deals/{platformDealId}:
+    get:
+      summary: "Retriee deal details & status"
+      operationId: "getDealDetails"
+      parameters:
+        - name: "platformDealId"
+          in: path
+          required: true
+          schema:
+            type: "string"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DealInfo"
+
+    delete:
+      summary: "Remove deal, e.g. if its not accepted yet or just orphan"
+      operationId: "deleteDeal"
+      parameters:
+        - name: "platformDealId"
+          in: path
+          required: true
+          schema:
+            type: "string"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DealInfo"
+
+  /deals/{platformDealId}/accept:
+    post:
+      summary: "Accept deal byt Payer"
+      operationId: "acceptDeal"
+      parameters:
+        - name: "platformDealId"
+          in: path
+          required: true
+          schema:
+            type: "string"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DealInfo"
+
+  /deals/{platformDealId}/cancel:
+    post:
+      summary: "Cancel deal, either by Payer or by Benificiar"
+      operationId: "cancelDeal"
+      parameters:
+        - name: "platformDealId"
+          in: path
+          required: true
+          schema:
+            type: "string"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DealInfo"
+
+  /deals/{platformDealId}/commit:
+    post:
+      summary: "Commit & pay for the deal"
+      operationId: "commitDeal"
+      parameters:
+        - name: "platformDealId"
+          in: path
+          required: true
+          schema:
+            type: "string"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DealInfo"
+
+components:
+
+  responses:
+    ErrorResponse:
+      description: "Some exception occurred"
+      content:
+        applciation/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+
+  schemas:
+
+    DealState:
+      type: "string"
+      enum:
+        - Created
+        - Paid
+        - PayoutProcessError
+        - CancelError
+        - PayoutProcessing
+        - Completed
+        - PaymentHold
+        - Canceling
+        - Canceled
+
+    DealType:
+      type: "string"
+      enum:
+        - Deferred
+        - Instant
+
+    ArrayOfRepos:
+      type: array
+      items:
+        $ref: "#/components/schemas/RepoInfo"
+
+    RepoInfo:
+      type: "object"
+      additionalProperties: true
+
+    ArrayOfPullRequests:
+      type: array
+      items:
+        $ref: "#/components/schemas/PullRequestInfo"
+
+    PullRequestInfo:
+      type: "object"
+      additionalProperties: true
+
+    ArrayOfDeals:
+      type: array
+      items:
+        $ref: "#/components/schemas/DealInfo"
+
+    DealInfo:
+      type: "object"
+      properties:
+        PlatformDealId:
+          type: "string"
+          readOnly: true
+        DealStateId:
+          $ref: "#/components/schemas/DealState"
+          readOnly: true
+        CreateDate:
+          type: "string"
+          format: "date-time"
+          example: "2015-01-07T21:45:33"
+          readOnly: true
+        UpdateDate:
+          type: "string"
+          format: "date-time"
+          readOnly: true
+        ExpireDate:
+          type: "string"
+          format: "date-time"
+          readOnly: true
+        Amount:
+          type: "number"
+        CurrencyId:
+          type: "integer"
+        PlatformPayerId:
+          type: "string"
+        PayerPhoneNumber:
+          type: "string"
+        PayerPaymentToolId:
+          type: "integer"
+        PlatformBeneficiaryId:
+          type: "string"
+        BeneficiaryPaymentToolId:
+          type: "string"
+        ShortDescription:
+          type: "integer"
+        FullDescription:
+          type: "string"
+        DealTypeId:
+          $ref: "#/components/schemas/DealType"
+          readOnly: true
+        LastErrorCode:
+          type: "string"
+        LastErrorMessage:
+          type: "string"

@@ -77,7 +77,7 @@ const routes = [
         component: SettingsTab
       }
     ]
-  },
+  }
 ];
 
 const router = new VueRouter({
