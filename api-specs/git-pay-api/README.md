@@ -1,4 +1,10 @@
 
+## Validate specification
+```
+# to validate
+> npx openapi-generator validate -i openapi.yaml
+```
+
 ## Generate server
 
 ```
