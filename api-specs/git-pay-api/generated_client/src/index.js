@@ -13,8 +13,19 @@
 
 
 import ApiClient from './ApiClient';
+import BillingAccount from './model/BillingAccount';
 import DealInfo from './model/DealInfo';
-import DefaultApi from './api/DefaultApi';
+import DealState from './model/DealState';
+import DealType from './model/DealType';
+import Event from './model/Event';
+import PaymentDetails from './model/PaymentDetails';
+import UserDealInfo from './model/UserDealInfo';
+import UserSettings from './model/UserSettings';
+import UserSettingsContractSettings from './model/UserSettingsContractSettings';
+import DealsApi from './api/DealsApi';
+import PullsApi from './api/PullsApi';
+import ReposApi from './api/ReposApi';
+import UsersApi from './api/UsersApi';
 
 
 /**
@@ -56,14 +67,80 @@ export {
     ApiClient,
 
     /**
+     * The BillingAccount model constructor.
+     * @property {module:model/BillingAccount}
+     */
+    BillingAccount,
+
+    /**
      * The DealInfo model constructor.
      * @property {module:model/DealInfo}
      */
     DealInfo,
 
     /**
-    * The DefaultApi service constructor.
-    * @property {module:api/DefaultApi}
+     * The DealState model constructor.
+     * @property {module:model/DealState}
+     */
+    DealState,
+
+    /**
+     * The DealType model constructor.
+     * @property {module:model/DealType}
+     */
+    DealType,
+
+    /**
+     * The Event model constructor.
+     * @property {module:model/Event}
+     */
+    Event,
+
+    /**
+     * The PaymentDetails model constructor.
+     * @property {module:model/PaymentDetails}
+     */
+    PaymentDetails,
+
+    /**
+     * The UserDealInfo model constructor.
+     * @property {module:model/UserDealInfo}
+     */
+    UserDealInfo,
+
+    /**
+     * The UserSettings model constructor.
+     * @property {module:model/UserSettings}
+     */
+    UserSettings,
+
+    /**
+     * The UserSettingsContractSettings model constructor.
+     * @property {module:model/UserSettingsContractSettings}
+     */
+    UserSettingsContractSettings,
+
+    /**
+    * The DealsApi service constructor.
+    * @property {module:api/DealsApi}
     */
-    DefaultApi
+    DealsApi,
+
+    /**
+    * The PullsApi service constructor.
+    * @property {module:api/PullsApi}
+    */
+    PullsApi,
+
+    /**
+    * The ReposApi service constructor.
+    * @property {module:api/ReposApi}
+    */
+    ReposApi,
+
+    /**
+    * The UsersApi service constructor.
+    * @property {module:api/UsersApi}
+    */
+    UsersApi
 };

@@ -102,7 +102,7 @@ Please follow the [installation](#installation) instruction and execute the foll
 var GitPayApi = require('git_pay_api');
 
 
-var api = new GitPayApi.DefaultApi()
+var api = new GitPayApi.DealsApi()
 var platformDealId = "platformDealId_example"; // {String} 
 var callback = function(error, data, response) {
   if (error) {
@@ -121,20 +121,38 @@ All URIs are relative to *http://localhost/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*GitPayApi.DefaultApi* | [**acceptDeal**](docs/DefaultApi.md#acceptDeal) | **POST** /deals/{platformDealId}/accept | Accept deal byt Payer
-*GitPayApi.DefaultApi* | [**addNewDeal**](docs/DefaultApi.md#addNewDeal) | **POST** /deals | Creates a new deal
-*GitPayApi.DefaultApi* | [**cancelDeal**](docs/DefaultApi.md#cancelDeal) | **POST** /deals/{platformDealId}/cancel | Cancel deal, either by Payer or by Benificiar
-*GitPayApi.DefaultApi* | [**commitDeal**](docs/DefaultApi.md#commitDeal) | **POST** /deals/{platformDealId}/commit | Commit &amp; pay for the deal
-*GitPayApi.DefaultApi* | [**deleteDeal**](docs/DefaultApi.md#deleteDeal) | **DELETE** /deals/{platformDealId} | Remove deal, e.g. if its not accepted yet or just orphan
-*GitPayApi.DefaultApi* | [**getDealDetails**](docs/DefaultApi.md#getDealDetails) | **GET** /deals/{platformDealId} | Retriee deal details &amp; status
-*GitPayApi.DefaultApi* | [**getRegisteredDeals**](docs/DefaultApi.md#getRegisteredDeals) | **GET** /deals | Returns a list of registered deals
-*GitPayApi.DefaultApi* | [**getRegisteredPulls**](docs/DefaultApi.md#getRegisteredPulls) | **GET** /pulls | Returns a list of registered pull-requests
-*GitPayApi.DefaultApi* | [**getRegisteredRepos**](docs/DefaultApi.md#getRegisteredRepos) | **GET** /repos | Returns a list of registered repositories
+*GitPayApi.DealsApi* | [**acceptDeal**](docs/DealsApi.md#acceptDeal) | **POST** /deals/{platformDealId}/accept | Accept deal byt Payer
+*GitPayApi.DealsApi* | [**addNewDeal**](docs/DealsApi.md#addNewDeal) | **POST** /deals | Creates a new deal
+*GitPayApi.DealsApi* | [**cancelDeal**](docs/DealsApi.md#cancelDeal) | **POST** /deals/{platformDealId}/cancel | Cancel deal, either by Payer or by Benificiar
+*GitPayApi.DealsApi* | [**commitDeal**](docs/DealsApi.md#commitDeal) | **POST** /deals/{platformDealId}/commit | Commit &amp; pay for the deal
+*GitPayApi.DealsApi* | [**deleteDeal**](docs/DealsApi.md#deleteDeal) | **DELETE** /deals/{platformDealId} | Remove deal, e.g. if its not accepted yet or just orphan
+*GitPayApi.DealsApi* | [**getDealDetails**](docs/DealsApi.md#getDealDetails) | **GET** /deals/{platformDealId} | Retriee deal details &amp; status
+*GitPayApi.DealsApi* | [**getRegisteredDeals**](docs/DealsApi.md#getRegisteredDeals) | **GET** /deals | Returns a list of registered deals
+*GitPayApi.PullsApi* | [**getRegisteredPulls**](docs/PullsApi.md#getRegisteredPulls) | **GET** /pulls | Returns a list of registered pull-requests
+*GitPayApi.ReposApi* | [**getRegisteredRepos**](docs/ReposApi.md#getRegisteredRepos) | **GET** /repos | Returns a list of registered repositories
+*GitPayApi.UsersApi* | [**addUserPull**](docs/UsersApi.md#addUserPull) | **POST** /users/{userId}/pulls | Add the pull request to the list of user work items
+*GitPayApi.UsersApi* | [**addUserRepo**](docs/UsersApi.md#addUserRepo) | **POST** /users/{userId}/repos | Add the repository to the User&#39;s collection, as a an owner
+*GitPayApi.UsersApi* | [**getUserDeals**](docs/UsersApi.md#getUserDeals) | **GET** /users/{userId}/deals | Get List of user deals (that could be either as payer or benificiary
+*GitPayApi.UsersApi* | [**getUserEvents**](docs/UsersApi.md#getUserEvents) | **GET** /users/{userId}/events | Return User-specific Events, used on Activity tab
+*GitPayApi.UsersApi* | [**getUserPulls**](docs/UsersApi.md#getUserPulls) | **GET** /users/{userId}/pulls | User pull requests available for the deals
+*GitPayApi.UsersApi* | [**getUserRepos**](docs/UsersApi.md#getUserRepos) | **GET** /users/{userId}/repos | User-specific repositories
+*GitPayApi.UsersApi* | [**getUserSettings**](docs/UsersApi.md#getUserSettings) | **GET** /users/{userId}/settings | User-specific settings
+*GitPayApi.UsersApi* | [**removeUserPull**](docs/UsersApi.md#removeUserPull) | **DELETE** /users/{userId}/pulls/{pullId} | Remove pull request from the user&#39;s work items
+*GitPayApi.UsersApi* | [**removeUserRepo**](docs/UsersApi.md#removeUserRepo) | **DELETE** /users/{userId}/repos/{repoId} | Remove user repository
+*GitPayApi.UsersApi* | [**updateUserSettings**](docs/UsersApi.md#updateUserSettings) | **PUT** /users/{userId}/settings | Update user settings
 
 
 ## Documentation for Models
 
+ - [GitPayApi.BillingAccount](docs/BillingAccount.md)
  - [GitPayApi.DealInfo](docs/DealInfo.md)
+ - [GitPayApi.DealState](docs/DealState.md)
+ - [GitPayApi.DealType](docs/DealType.md)
+ - [GitPayApi.Event](docs/Event.md)
+ - [GitPayApi.PaymentDetails](docs/PaymentDetails.md)
+ - [GitPayApi.UserDealInfo](docs/UserDealInfo.md)
+ - [GitPayApi.UserSettings](docs/UserSettings.md)
+ - [GitPayApi.UserSettingsContractSettings](docs/UserSettingsContractSettings.md)
 
 
 ## Documentation for Authorization
