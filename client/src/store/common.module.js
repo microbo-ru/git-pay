@@ -36,20 +36,6 @@ const actions = {
         commit("UPDATE_PRS_BY_AUTHOR", { author, pulls: res });
     },
 
-    async set_username({ state, commit, dispatch }, name) {
-        commit("UPDATE_USERNAME", name);
-        dispatch("fetch_prs_by_author", name);
-        dispatch("fetch_repos");
-        dispatch("fetch_marked_repos");
-        dispatch("fetch_marked_pulls");
-        let res = await axios.get(`${state.server_url}/users`);
-
-        let users = res.data;
-        let status = users[name]["status"];
-        console.log(users, status);
-        commit("UPDATE_STATUS", status);
-    },
-
     async fetch_repos({ state, commit }) {
         if (!state.username) return;
         let repos = await axios.post(`${state.server_url}/repos`, {
@@ -123,9 +109,6 @@ const mutations =  {
         let pulls = payload.pulls;
 
         Vue.set(state.pulls, author, pulls);
-    },
-    UPDATE_USERNAME(state, username) {
-        state.username = username;
     },
     UPDATE_STATUS(state, status) {
         state.status = status;

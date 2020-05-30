@@ -2,54 +2,55 @@
   <v-app :style="{ background: $vuetify.theme.themes[theme].background }">
 
     <v-card>
-    <v-app-bar app color="primary" dark>
+      <v-app-bar app color="primary" dark>
 
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-      <v-toolbar-title>
-        <!--<router-link to="/"> <v-btn text x-large>GitPay </v-btn></router-link>-->
-        <router-link to="/">
-          <v-btn text x-large>
-            <img src="@/assets/logo_gitpay_branch.png" height="40px" />
-          </v-btn>
-        </router-link>
-      </v-toolbar-title>
+        <v-toolbar-title>
+          <!--<index-link to="/"> <v-btn text x-large>GitPay </v-btn></index-link>-->
+          <router-link to="/">
+            <v-btn text x-large>
+              <img src="@/assets/logo_gitpay_branch.png" height="40px" />
+            </v-btn>
+          </router-link>
+        </v-toolbar-title>
 
-      <v-divider inset vertical/>
+        <v-divider inset vertical/>
 
-      <v-container>
-        <router-link to="projects"><v-btn text>Задания</v-btn></router-link>
-        <router-link to="user"><v-btn text>Личный кабинет</v-btn></router-link>
-        <router-link to="Dashboard"><v-btn text>Панель управления</v-btn></router-link>
-      </v-container>
+        <v-container>
+          <router-link to="/projects"><v-btn text>Задания</v-btn></router-link>
+          <router-link to="/user"><v-btn text>Личный кабинет</v-btn></router-link>
+          <router-link to="/my"><v-btn text>Панель управления</v-btn></router-link>
+        </v-container>
 
-      <v-btn @click="showOverlay" outlined>
-        <div v-if="!$store.state.username">login</div>
-        <div v-if="$store.state.username">logout</div>
-      </v-btn>
-
-    </v-app-bar>
-
-    <v-content>
-      <v-overlay :value="overlay" :absolute="true">
-        <v-btn icon @click="overlay = false">
-          <v-icon>mdi-close</v-icon>
+        <v-btn @click="showOverlay" outlined>
+          <div v-if="!account.user">login</div>
+          <div v-if="account.user">logout</div>
         </v-btn>
-        <Login @show-overlay="showOverlay" />
-      </v-overlay>
 
-      <div v-if="alert.message">
-        <v-alert type="error">{{alert.message}}</v-alert>
-      </div>
+      </v-app-bar>
 
-      <router-view></router-view>
-    </v-content>
+      <v-content>
+        <v-overlay :value="overlay" :absolute="true">
+          <v-btn icon @click="overlay = false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+          <Login @show-overlay="showOverlay" />
+        </v-overlay>
 
-    <v-footer app>
+        <div v-if="alert.message">
+          <v-alert type="error">{{alert.message}}</v-alert>
+        </div>
 
-    </v-footer>
+        <router-view></router-view>
+      </v-content>
 
-  </v-card>
+      <v-footer app>
+
+      </v-footer>
+
+    </v-card>
+
   </v-app>
 </template>
 
@@ -68,9 +69,9 @@ export default {
   }),
 
   created() {
-    this.$store.dispatch("common/fetch_contracts");
-    this.$store.dispatch("common/fetch_all_marked_pulls");
-    this.$store.dispatch("common/fetch_users");
+    //this.$store.dispatch("common/fetch_contracts");
+    //this.$store.dispatch("common/fetch_all_marked_pulls");
+    //this.$store.dispatch("common/fetch_users");
   },
 
   methods: {
@@ -90,7 +91,8 @@ export default {
     },
 
     ...mapState({
-      alert: state => state.alert
+      alert: state => state.alert,
+      account: state => state.account
     })
   },
 

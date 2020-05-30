@@ -14,17 +14,16 @@
 
 <script>
     export default {
-        name: "Dashboard",
+        name: "My",
         data() {
             return {
-                activeTab: `/overview`,
+                activeTab: `Overview`,
                 tabs: [
-                    { id: 1, name: "Overview", route: `/overview` },
-                    { id: 1, name: "Repos", route: `/repos` },
-                    { id: 1, name: "Pulls", route: `/pulls` },
-                    { id: 1, name: "Activity", route: `/activity` },
-                    { id: 1, name: "Settings", route: `/settings` },
-                    /* { id: 2, name: "Project", route: `/user/${this.id}/project` }*/
+                    { id: 1, name: "Overview", route: `/my/overview` },
+                    { id: 2, name: "Repos", route: `/my/repos` },
+                    { id: 3, name: "Pulls", route: `/my/pulls` },
+                    { id: 4, name: "Activity", route: `/my/activity` },
+                    { id: 5, name: "Settings", route: `/my/settings` }
                 ]
             };
         }

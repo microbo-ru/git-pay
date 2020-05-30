@@ -4,8 +4,10 @@ export const userService = {
 }
 
 function login( username ) {
-
-
+    if (username) {
+        localStorage.setItem('user', JSON.stringify(username));
+        console.log("logged in:" + username);
+    }
 }
 
 function logout() {
