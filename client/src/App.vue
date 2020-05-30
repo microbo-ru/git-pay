@@ -36,8 +36,19 @@
       <router-view></router-view>
     </v-content>
 
-    <v-footer app>
+    <v-footer app dark padless>
+      <v-card class="flex" flat tile>
 
+        <v-card-text class="py-2 white--text text-center">
+          <router-link to="privacypolicy"><v-btn text small>Политика использования персональных данных</v-btn></router-link>
+          <router-link to="terms"><v-btn text small>Условия предоставления сервиса</v-btn></router-link>
+
+          <v-spacer></v-spacer>
+
+          {{ new Date().getFullYear() }} — <strong>GitPay</strong>
+        </v-card-text>
+
+      </v-card>
     </v-footer>
   </v-app>
 </template>

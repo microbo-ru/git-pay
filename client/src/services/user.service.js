@@ -3,7 +3,7 @@ export const userService = {
     logout
 }
 
-function login( username ) {
+function login( /*username*/ ) {
 
 
 }
