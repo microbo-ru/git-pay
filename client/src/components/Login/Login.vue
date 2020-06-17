@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import firebase from "firebase";
+
 export default {
   name: "Login",
   data() {
@@ -44,9 +46,21 @@ export default {
     },
     select_username() {
       this.$emit("show-overlay");
-      this.$emit("selected_username");
-      this.$store.dispatch("set_username", this.username);
-      this.$router.push("User");
+      var router = this.$router;
+      var store = this.$store;
+
+      var provider = new firebase.auth.GithubAuthProvider();
+
+      provider.addScope('repo');
+
+      firebase.auth().signInWithPopup(provider).then(function(result) {
+        console.log(result);
+        store.dispatch("set_username", result.user.displayName);
+        router.push("User");
+        
+      }).catch(function(error) {
+        console.log(error);
+      });
     },
   },
 };
