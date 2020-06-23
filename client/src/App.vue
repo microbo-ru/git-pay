@@ -19,6 +19,8 @@
         <div v-if="!$store.state.username">login</div>
         <div v-if="$store.state.username">logout</div>
       </v-btn>
+      
+      <navbar>test</navbar>
     </v-app-bar>
 
     <v-content>
@@ -48,18 +50,20 @@ import Login from "./components/Login/Login";
 import firebase from "firebase";
 import { mapState, mapActions } from 'vuex';
 
+import navbar from "./components/Navbar";
+
 export default {
   name: "App",
-  components: { Login },
+  components: { Login, navbar },
 
   data: () => ({
     overlay: false
   }),
 
   created() {
-    this.$store.dispatch("common/fetch_contracts");
-    this.$store.dispatch("common/fetch_all_marked_pulls");
-    this.$store.dispatch("common/fetch_users");
+    // this.$store.dispatch("common/fetch_contracts");
+    // this.$store.dispatch("common/fetch_all_marked_pulls");
+    // this.$store.dispatch("common/fetch_users");
   },
 
   methods: {
