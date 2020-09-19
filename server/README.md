@@ -32,6 +32,12 @@ Signature: aocfn0aPkro4+Xje87KCTG/HkMXn6/hZp66FuPZGbsI=
 
 ### Registered performer/customer
 
+Sent:
+...
+Signature: iyq65myTlYyIiKYW1hEt/AGkIhW5Ya9gupzVKK6kQlI=
+
+Replay:
+
 BeneficiaryPaymentToolId: 8660
 PlatformBeneficiaryId: microbo2
 Timestamp: 2020-09-19T13:39:14
