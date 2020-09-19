@@ -7,13 +7,13 @@
       @submit="handleForm"
     >
       <input type="hidden" name="PhoneNumber" id="PhoneNumber" value="+79818925700" />
-      <input type="hidden" name="PlatformPayerId" id="PlatformPayerId" value="microbo" />
+      <input type="hidden" name="PlatformPayerId" id="PlatformPayerId" value="microbo1" />
       <input type="hidden" name="PlatformId" id="PlatformId" value="microbo" />
       <input type="hidden" name="ReturnUrl" id="ReturnUrl" value="http://microbo.ru/w1" />
       <input type="hidden" name="Timestamp" id="Timestamp" />
       <input type="hidden" name="Signature" id="Signature" value />
 
-      <input type="submit" value="Конечно заплачу" style="color: blue;" />
+      <input type="submit" value="Зарегистрировать карту заказчика" style="color: blue;" />
     </form>
   </div>
 </template>
@@ -36,8 +36,8 @@ export default {
       //Signature = Base64(SignatureMethod(UTF8(Sort(Params) + SignatureKey)))
       const params =
         document.getElementById("PhoneNumber").value +
-        document.getElementById("PlatformPayerId").value +
         document.getElementById("PlatformId").value +
+        document.getElementById("PlatformPayerId").value +
         document.getElementById("ReturnUrl").value +
         date;
       const crypto = require("crypto");
