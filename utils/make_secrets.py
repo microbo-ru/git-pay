@@ -36,30 +36,32 @@ def make_signature_v3():
         "CurrencyId":643,
         "ShortDescription":"Test pay",
         "FullDescription":"Test pay",
-        "DeferPayout": True 
+        "DeferPayout": True
     }
 
-    payload = json.dumps(payload) 
-    
+    payload1 = json.dumps(payload)
+    # print(payload1)
+    # exit()
+
     now_utc = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%S')
 
     key = "TZvds4HWduo6unK9emOFzIuRHXMueUXUREk15tSDdJ2yY0x7TJuDUD"
 
-    s = url + now_utc + payload + key
+    s = url + now_utc + payload1 + key
     signature =  base64.b64encode(hashlib.sha256(s.encode('utf-8')).digest())
     # print(signature)
 
     headers = {
         'Content-Type': 'application/json',
-        'X-Wallet-PlatformId': "microbo",
+        'X-Wallet-PlatformId': 'microbo',
         'X-Wallet-Signature': signature,
         'X-Wallet-Timestamp': now_utc
-    }    
+    }
     print(headers)
     # exit()
 
     # Signature = Base64(SignatureMethod(UTF8(URL + Timestamp + RequestBody + SignatureKey)));
-    r = requests.post(url, data=json.dumps(payload), headers=headers)
+    r = requests.post(url, data=payload1, headers=headers)
     print(r.content)
     print(r.status_code, r.reason)
 
