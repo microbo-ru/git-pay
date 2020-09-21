@@ -27,11 +27,11 @@ def make_signature_v3():
 
     payload = {
         "PlatformDealId":111,
-        "PlatformPayerId":"8659",
+        "PlatformPayerId":"microbo1",
         "PayerPhoneNumber":"+79818925700",
-        "PayerPaymentToolId":1,
-        "PlatformBeneficiaryId":"8660",
-        "BeneficiaryPaymentToolId":1,
+        "PayerPaymentToolId":"8659",
+        "PlatformBeneficiaryId":"microbo2",
+        "BeneficiaryPaymentToolId":"8660",
         "Amount":10.00,
         "CurrencyId":643,
         "ShortDescription":"Test pay",
