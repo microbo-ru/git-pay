@@ -19,6 +19,8 @@
         <div v-if="!$store.state.username">login</div>
         <div v-if="$store.state.username">logout</div>
       </v-btn>
+      
+      <navbar>test</navbar>
     </v-app-bar>
 
     <v-content>
@@ -45,26 +47,44 @@
 <script>
 
 import Login from "./components/Login/Login";
+import firebase from "firebase";
 import { mapState, mapActions } from 'vuex';
+
+import navbar from "./components/Navbar";
 
 export default {
   name: "App",
-  components: { Login },
+  components: { Login, navbar },
 
   data: () => ({
     overlay: false
   }),
 
   created() {
-    this.$store.dispatch("common/fetch_contracts");
-    this.$store.dispatch("common/fetch_all_marked_pulls");
-    this.$store.dispatch("common/fetch_users");
+    // this.$store.dispatch("common/fetch_contracts");
+    // this.$store.dispatch("common/fetch_all_marked_pulls");
+    // this.$store.dispatch("common/fetch_users");
   },
 
   methods: {
     showOverlay() {
-      if (!this.loginState) this.overlay = !this.overlay;
-      else alert("dont");
+      // if (!this.loginState) this.overlay = !this.overlay;
+      // else alert("dont");
+      var router = this.$router;
+      var store = this.$store;
+
+      var provider = new firebase.auth.GithubAuthProvider();
+
+      provider.addScope('repo');
+
+      firebase.auth().signInWithPopup(provider).then(function(result) {
+        console.log(result);
+        store.dispatch("set_username", result.user.displayName);
+        router.push("User");
+        
+      }).catch(function(error) {
+        console.log(error);
+      });
     },
 
     ...mapActions({

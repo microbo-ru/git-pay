@@ -17,3 +17,28 @@ open http://localhost:8080/docs
 ```
 
 This project leverages the mega-awesome [swagger-tools](https://github.com/apigee-127/swagger-tools) middleware which does most all the work.
+
+
+
+## Callbacks
+
+### Registered payer
+
+PayerPaymentToolId: 8659
+PlatformPayerId: microbo1
+Timestamp: 2020-09-19T13:10:11
+Signature: aocfn0aPkro4+Xje87KCTG/HkMXn6/hZp66FuPZGbsI=
+
+
+### Registered performer/customer
+
+Sent:
+...
+Signature: iyq65myTlYyIiKYW1hEt/AGkIhW5Ya9gupzVKK6kQlI=
+
+Replay:
+
+BeneficiaryPaymentToolId: 8660
+PlatformBeneficiaryId: microbo2
+Timestamp: 2020-09-19T13:39:14
+Signature: g/A484VsqjircKSHvxjeIv5flo+cmDH+d8OEFm8kBzA=

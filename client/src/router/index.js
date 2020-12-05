@@ -26,17 +26,17 @@ const router = new VueRouter({
   mode: "history",
 });
 
-router.beforeEach( (to, from, next) => {
-  // redirect to login page is user isn't authenticated
-  const publicPages = ['/', '/w1', '/projects', '/my'];
-  const authRequired = !publicPages.includes(to.path);
-  const loggedIn = localStorage.getItem('user');
+// router.beforeEach( (to, from, next) => {
+//   // redirect to login page is user isn't authenticated
+//   const publicPages = ['/', '/w1', '/projects', '/my'];
+//   const authRequired = !publicPages.includes(to.path);
+//   const loggedIn = localStorage.getItem('user');
 
-  if (authRequired && !loggedIn) {
-    return next('/login');
-  }
+//   if (authRequired && !loggedIn) {
+//     return next('/login');
+//   }
 
-  next();
-});
+//   next();
+// });
 
 export default router;

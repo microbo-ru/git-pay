@@ -8,8 +8,18 @@ import { common } from "./common.module";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  state: {
+    user: {
+      loggedIn: false,
+      data: null
+    }
+  },
 
   getters: {
+    user(state){
+      return state.user
+    },
+
     repos: (state) => {
       let repo = [];
       for (let key of Object.keys(state.contracts)) {
@@ -70,6 +80,29 @@ export default new Vuex.Store({
 
     get_agreed: (state) => {
       return state.agreed;
+    }
+  },
+
+  mutations: {
+    SET_LOGGED_IN(state, value) {
+      state.user.loggedIn = value;
+    },
+    SET_USER(state, data) {
+      state.user.data = data;
+    }
+  },
+  
+  actions: {
+    fetchUser({ commit }, user) {
+      commit("SET_LOGGED_IN", user !== null);
+      if (user) {
+        commit("SET_USER", {
+          displayName: user.displayName,
+          email: user.email
+        });
+      } else {
+        commit("SET_USER", null);
+      }
     }
   },
 
